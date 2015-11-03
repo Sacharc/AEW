@@ -8,6 +8,11 @@ package AEW.model;
 abstract class Pionek {
     
     /**
+     * Okresla wlasciciela pionka
+     */
+    Wlasciciel wlasciciel;
+
+    /**
      * Sprawdza czy pionek moze siê ruszyc 
      * @return True jezeli tak
      */
@@ -27,4 +32,12 @@ abstract class Pionek {
      */
     abstract int wykonajBicie(final Kierunek k);
 
+    Wlasciciel getWlasciciel() {
+        return wlasciciel;
+    }
+
+    void setWlasciciel(Wlasciciel wlasciciel) {
+        this.wlasciciel = wlasciciel;
+    }
+    
 }
