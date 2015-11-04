@@ -11,6 +11,7 @@ import AEW.widok.Widok;
 public class Warcaby {
     
     public static void main(String[] args) {
+    System.out.println("Sacharczuk wez sprawdz czy dziala :D");
 	BlockingQueue<Event> kolejka = new LinkedBlockingQueue<Event>();
 	Model model = new Model();
 	Widok widok = new Widok(kolejka);
