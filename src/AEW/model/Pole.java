@@ -1,7 +1,7 @@
 package AEW.model;
 
 /**
- * Mo¿e zawieraæ pionek lub byæ puste
+ * Moï¿½e zawieraï¿½ pionek lub byï¿½ puste
  * @author Mmm
  *
  */
@@ -12,7 +12,19 @@ class Pole {
 	p = null;
     }
 
-    Pionek getP() {
+    /**
+     * tworzy pole z pionkiem
+     * 
+	 * @param gracz1 - wlasciciel pionka
+	 *
+	 * @author Mateusz Skolimowski
+	 */
+	public Pole(Wlasciciel gracz1)
+	{
+		p = new ZwyklyPionek(gracz1);
+	}
+
+	Pionek getP() {
         return p;
     }
 
