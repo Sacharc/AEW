@@ -8,9 +8,10 @@ package AEW.model;
 public class Pole {
     Pionek p;
     
-    Pole() {
+    public Pole() {
 	p = null;
     }
+    
 
     /**
      * tworzy pole z pionkiem

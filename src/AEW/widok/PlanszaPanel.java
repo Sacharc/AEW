@@ -18,6 +18,8 @@ public class PlanszaPanel extends JPanel
 {	
 	public PolePanel [][] siatkaPaneli = new PolePanel[8][8];
 	
+	private Plansza plansza;
+	
 	/**
 	 * konstruktor inicjujacy glowny panel
 	 *
@@ -26,6 +28,8 @@ public class PlanszaPanel extends JPanel
 	 */
 	public PlanszaPanel(Plansza plansza)
 	{	
+		
+		this.plansza = plansza;
 		setLayout(new GridLayout(8, 8));
 		for(int i = 0 ; i < 8 ; i++)
 		{

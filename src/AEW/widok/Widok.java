@@ -5,6 +5,7 @@ import java.util.concurrent.BlockingQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import AEW.events.Event;
 import AEW.model.Plansza;
@@ -23,7 +24,7 @@ public class Widok {
     	this.kolejka = kolejka;
 	
     	//parametry ramki
-    	ramka = new JFrame("Wyszukiwacz");
+    	ramka = new JFrame("Warcaby");
     	ramka.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	ramka.setBounds(100, 100, 800, 800);
 	
@@ -34,4 +35,23 @@ public class Widok {
     	ramka.setVisible(true);		
     }
     
+    /**
+	 * funkcja tworzy nowy watek aby zmienic widok
+	 * 
+	 * @param tab - tablica na podstawie ktorej rysuje pola
+	 */
+	public void uaktualnij(Plansza plansza)
+	{
+		SwingUtilities.invokeLater(new Runnable() 
+		{
+			@Override
+			public void run() 
+			{
+				ramka.remove(glownyPanel);
+				glownyPanel = new PlanszaPanel(plansza);
+				ramka.add(glownyPanel);
+				ramka.validate();
+			}
+		});	
+	}   
 }

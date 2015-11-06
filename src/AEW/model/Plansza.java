@@ -1,7 +1,9 @@
 package AEW.model;
 
+import AEW.widok.PolePanel;
+
 public class Plansza {
-    Pole [][] plansza = new Pole[8][8];
+    public Pole [][] plansza = new Pole[8][8];
     
     /**
      * konstruktor inicjujacy pola na planszy
@@ -62,7 +64,7 @@ public class Plansza {
 	 *
 	 * @author Mateusz Skolimowski
 	 */
-	private void wypelnijWiersz(Wlasciciel gracz,int numerWiersza)
+	public void wypelnijWiersz(Wlasciciel gracz,int numerWiersza)
 	{
 		//wypelnia wierze parzyste
 		if(numerWiersza%2 == 0)
