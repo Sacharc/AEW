@@ -5,7 +5,7 @@ package AEW.model;
  * @author Mmm
  *
  */
-class Pole {
+public class Pole {
     Pionek p;
     
     Pole() {
@@ -24,7 +24,7 @@ class Pole {
 		p = new ZwyklyPionek(gracz1);
 	}
 
-	Pionek getP() {
+	public Pionek getP() {
         return p;
     }
 

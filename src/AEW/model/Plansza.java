@@ -105,7 +105,7 @@ public class Plansza {
      * @param y
      * @return Pole (x, y) lub null jezeli wspolrzedne nie naleza do planszy
      */
-    Pole getPole(int x, int y) {
+    public Pole getPole(int x, int y) {
 	if (x > -1 && x < 8 && y > -1 && y < 8)
 	    return plansza[x][y];
 	return null;
