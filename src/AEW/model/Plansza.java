@@ -1,7 +1,7 @@
 package AEW.model;
 
-class Plansza {
-    Pole [][] plansza;
+public class Plansza {
+    Pole [][] plansza = new Pole[8][8];
     
     /**
      * konstruktor inicjujacy pola na planszy
@@ -14,6 +14,7 @@ class Plansza {
     Plansza(Wlasciciel gracz1, Wlasciciel gracz2) 
     {
     	ustawPionki(gracz1,gracz2);
+    	wypisz();
     }
     
 	/**
@@ -109,5 +110,25 @@ class Plansza {
 	    return plansza[x][y];
 	return null;
     }
+
+	/**
+	 * 
+	 *
+	 * @author Mateusz Skolimowski
+	 */
+	public void wypisz()
+	{
+		for(int i = 0 ; i < 8 ; i++)
+		{
+			for(int j = 0 ; j < 8 ; j++)
+			{
+				if(plansza[i][j].p != null)
+					System.out.print('X');
+				else
+					System.out.print(' ');
+			}
+			System.out.println();
+		}
+	}
 
 }

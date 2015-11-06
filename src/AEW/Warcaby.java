@@ -16,7 +16,7 @@ public class Warcaby {
     Wlasciciel gracz2 = Wlasciciel.komputer;
 	BlockingQueue<Event> kolejka = new LinkedBlockingQueue<Event>();
 	Model model = new Model(gracz1,gracz2);
-	Widok widok = new Widok(kolejka);
+	Widok widok = new Widok(kolejka,model.getPlansza());
 	Kontroler kontroler = new Kontroler(model, widok, kolejka);
 	kontroler.start();
     }

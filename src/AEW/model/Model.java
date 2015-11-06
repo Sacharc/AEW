@@ -2,6 +2,14 @@ package AEW.model;
 
 public class Model
 {
+	/**
+	 * @return the plansza
+	 */
+	public Plansza getPlansza()
+	{
+		return plansza;
+	}
+
 	/**zmienna reprezentujaca plansze z pionkami*/
 	private Plansza plansza;
 
