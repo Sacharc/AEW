@@ -1,9 +1,8 @@
 package AEW.model;
 
 /**
- * Abstrakcyjna klasa reprezentuj�ca pionek na planszy
- * @author Mmm
- *
+ * Abstrakcyjna klasa reprezentujaca pionek na planszy
+
  */
 public abstract class Pionek {
     
@@ -13,7 +12,7 @@ public abstract class Pionek {
     Wlasciciel wlasciciel;
 
     /**
-     * Sprawdza czy pionek moze si� ruszyc 
+     * Sprawdza czy pionek moze sie ruszyc 
      * @return True jezeli tak
      */
     abstract boolean czyMozeRuszyc();
@@ -28,7 +27,7 @@ public abstract class Pionek {
     /**
      * Wykonuje bicie w kierunku k
      * @param k kierunek bicia
-     * @return Krotno�� bicia
+     * @return Krotnosc bicia
      */
     abstract int wykonajBicie(final Kierunek k);
 

@@ -1,23 +1,23 @@
 package AEW.model;
 
-final class Damka extends Pionek{
+final class Damka extends Pionek {
 
     @Override
     boolean czyMozeRuszyc() {
-	// TODO Auto-generated method stub
-	return false;
+        // TODO Auto-generated method stub
+        return false;
     }
 
     @Override
     void ruch(int x, int y) {
-	// TODO Auto-generated method stub
-	
+        // TODO Auto-generated method stub
+
     }
 
     @Override
     int wykonajBicie(Kierunek k) {
-	// TODO Auto-generated method stub
-	return 0;
+        // TODO Auto-generated method stub
+        return 0;
     }
 
 }

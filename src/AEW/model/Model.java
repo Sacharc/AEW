@@ -18,8 +18,6 @@ public class Model
 	 * 
 	 * @param gracz1
 	 * @param gracz2
-	 *
-	 * @author Mateusz Skolimowski
 	 */
 	public Model(Wlasciciel gracz1, Wlasciciel gracz2)
 	{

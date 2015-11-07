@@ -22,8 +22,6 @@ public class PlanszaPanel extends JPanel
 	
 	/**
 	 * konstruktor inicjujacy glowny panel
-	 *
-	 * @author Mateusz Skolimowski
 	 * @param plansza 
 	 */
 	public PlanszaPanel(Plansza plansza)

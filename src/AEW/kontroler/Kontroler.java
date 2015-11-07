@@ -10,7 +10,7 @@ public class Kontroler {
     private Model model;
     private Widok widok;
     private BlockingQueue<Event> kolejka;
-    
+
     /**
      * 
      * @param model
@@ -18,18 +18,18 @@ public class Kontroler {
      * @param kolejka
      */
     public Kontroler(Model model, Widok widok, BlockingQueue<Event> kolejka) {
-	//TODO Strategia
-	this.model = model;
-	this.widok = widok;
-	this.kolejka = kolejka;
-	
+        // TODO Strategia
+        this.model = model;
+        this.widok = widok;
+        this.kolejka = kolejka;
+
     }
-    
+
     /**
      * Petla glowna kontrolera
      */
     public void start() {
-	//TODO
+        // TODO
     }
-    
+
 }
