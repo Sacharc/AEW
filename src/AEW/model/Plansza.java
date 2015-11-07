@@ -54,9 +54,9 @@ public class Plansza {
         for (int j = 0; j < 8; j++) {
             // co drugie miejsce od poczatku stawiamy pionek
             if (j % 2 == numerWiersza % 2)
-                plansza[numerWiersza][j] = new Pole(gracz);
-            else
                 plansza[numerWiersza][j] = new Pole();
+            else
+                plansza[numerWiersza][j] = new Pole(gracz);
         }
     }
 
