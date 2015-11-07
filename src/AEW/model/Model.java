@@ -29,7 +29,7 @@ public class Model
 	 * @param x
 	 * @param y
 	 */
-	public void ruch(int x, int y) {
+	public void ruch(Wspolrzedne w) {
 	    //TODO
 	}
 	

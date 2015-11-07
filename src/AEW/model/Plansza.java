@@ -1,9 +1,12 @@
 package AEW.model;
 
-import AEW.widok.PolePanel;
+import java.util.ArrayList;
+
 
 public class Plansza {
     public Pole[][] plansza = new Pole[8][8];
+    
+    private ArrayList<Bicie> aktywneBicia;
 
     /**
      * konstruktor inicjujacy pola na planszy
@@ -13,6 +16,12 @@ public class Plansza {
      */
     Plansza(Wlasciciel gracz1, Wlasciciel gracz2) {
         ustawPionki(gracz1, gracz2);
+        aktywneBicia = new ArrayList<Bicie>();
+        
+    }
+    
+    boolean czyAktywneBicia() {
+        return !aktywneBicia.isEmpty();
     }
 
     /**
@@ -74,6 +83,6 @@ public class Plansza {
     }
 
     private boolean czyNalezy(int x, int y) {
-        return x > -1 && x < 8 && y > -1 && y < 8;
+        return x >= 0 && x < 8 && y >= 0 && y < 8;
     }
 }

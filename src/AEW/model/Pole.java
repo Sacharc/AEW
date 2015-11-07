@@ -27,11 +27,18 @@ public class Pole {
     void setP(Pionek p) {
         this.p = p;
     }
-
+    
+    /**
+     * Informuje czy pole jest puste
+     * @return true jezeli puste
+     */
     boolean isEmpty() {
         return p == null;
     }
-
+    
+    /**
+     * Ustawia wartosc pola na puste
+     */
     void clear() {
         p = null;
     }

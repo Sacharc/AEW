@@ -10,6 +10,10 @@ public abstract class Pionek {
      * Okresla wlasciciela pionka
      */
     Wlasciciel wlasciciel;
+    /**
+     * Je¿eli siê nie przyda to do wywalenia narazie roboczo zostawiam
+     */
+    Wspolrzedne w;
 
     /**
      * Sprawdza czy pionek moze sie ruszyc 
@@ -22,7 +26,7 @@ public abstract class Pionek {
      * @param x Do moï¿½liwej zmiany na kierunek np lewo prawo
      * @param y
      */
-    abstract void ruch(final int x, final int y);
+    abstract void ruch(final Wspolrzedne w);
     
     /**
      * Wykonuje bicie w kierunku k
@@ -38,5 +42,13 @@ public abstract class Pionek {
     void setWlasciciel(Wlasciciel wlasciciel) {
         this.wlasciciel = wlasciciel;
     }
-    
+
+    Wspolrzedne getW() {
+        return w;
+    }
+
+    void setW(Wspolrzedne w) {
+        this.w = w;
+    }
+
 }

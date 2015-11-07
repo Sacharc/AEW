@@ -18,7 +18,7 @@ final class ZwyklyPionek extends Pionek {
     }
 
     @Override
-    void ruch(int x, int y) {
+    void ruch(final Wspolrzedne w) {
         // TODO Auto-generated method stub
     }
 
