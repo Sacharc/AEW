@@ -26,7 +26,6 @@ public class PlanszaPanel extends JPanel
 	 */
 	public PlanszaPanel(Plansza plansza)
 	{	
-		
 		this.plansza = plansza;
 		setLayout(new GridLayout(8, 8));
 		for(int i = 0 ; i < 8 ; i++)
@@ -35,20 +34,10 @@ public class PlanszaPanel extends JPanel
 			{
 				siatkaPaneli[i][j] = new PolePanel(plansza.getPole(i,j));
 				siatkaPaneli[i][j].setSize(100, 100);
-				if(i%2 == 0)
-				{
-					if( j%2 == 0 ) 
-						siatkaPaneli[i][j].setBackground(Color.WHITE);
-					else
-						siatkaPaneli[i][j].setBackground(Color.BLACK);
-				}
+				if( i%2 == j%2 ) 
+					siatkaPaneli[i][j].setBackground(Color.WHITE);
 				else
-				{
-					if(j%2 == 1 )
-						siatkaPaneli[i][j].setBackground(Color.WHITE);
-					else
-						siatkaPaneli[i][j].setBackground(Color.BLACK);
-				}
+					siatkaPaneli[i][j].setBackground(Color.BLACK);
 				siatkaPaneli[i][j].setVisible(true);
 				add(siatkaPaneli[i][j]);
 			}

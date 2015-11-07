@@ -38,9 +38,8 @@ public class Plansza {
      * @param numerWiersza
      */
     private void wypelnijWiersz(int numerWiersza) {
-        for (int j = 0; j < 8; j++) {
+        for (int j = 0; j < 8; j++)
             plansza[numerWiersza][j] = new Pole();
-        }
     }
 
     /**
