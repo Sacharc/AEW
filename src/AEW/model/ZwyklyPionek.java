@@ -1,5 +1,7 @@
 package AEW.model;
 
+import java.util.ArrayList;
+
 final class ZwyklyPionek extends Pionek {
 
     /**
@@ -26,6 +28,13 @@ final class ZwyklyPionek extends Pionek {
     int wykonajBicie(Kierunek k) {
         // TODO Auto-generated method stub
         return 0;
+    }
+
+    @Override
+    ArrayList<Bicie> szukajBicia(Plansza p) {
+        ArrayList<Bicie> bicia = new ArrayList<Bicie>();
+        //TODO Sprawdzic bicia we wszystkich kierunkiach
+        return bicia;
     }
 
 }

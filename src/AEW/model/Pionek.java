@@ -1,5 +1,7 @@
 package AEW.model;
 
+import java.util.ArrayList;
+
 /**
  * Abstrakcyjna klasa reprezentujaca pionek na planszy
 
@@ -34,6 +36,13 @@ public abstract class Pionek {
      * @return Krotnosc bicia
      */
     abstract int wykonajBicie(final Kierunek k);
+    
+    /**
+     * Szuka bic danego pionka
+     * @param p
+     * @return Lista bic
+     */
+    abstract ArrayList<Bicie> szukajBicia(Plansza p);
 
     public Wlasciciel getWlasciciel() {
         return wlasciciel;

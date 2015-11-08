@@ -24,4 +24,8 @@ public class Wspolrzedne {
     public void setY(int y) {
         this.y = y;
     }
+    
+    public boolean czyPoprawne(){
+        return x >= 0 && x < 8 && y >= 0 && y < 8;
+    }
 }

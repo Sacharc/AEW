@@ -2,11 +2,17 @@ package AEW.model;
 
 import java.util.ArrayList;
 
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 public class Plansza {
     public Pole[][] plansza = new Pole[8][8];
     
     private ArrayList<Bicie> aktywneBicia;
+    /** Mapa setow pionkow*/
+    private Map<Wlasciciel, Set<Pionek>> pionkiGracza;
 
     /**
      * konstruktor inicjujacy pola na planszy
@@ -15,15 +21,33 @@ public class Plansza {
      * @param gracz2
      */
     Plansza(Wlasciciel gracz1, Wlasciciel gracz2) {
+        pionkiGracza = new TreeMap<>();
+        pionkiGracza.put(gracz1, new HashSet<Pionek>());
+        pionkiGracza.put(gracz2, new HashSet<Pionek>());
         ustawPionki(gracz1, gracz2);
         aktywneBicia = new ArrayList<Bicie>();
-        
     }
     
+    /**
+     * Sprawdza czy lista bic jest pusta
+     * @return true jezeli lista bic jest pusta
+     */
     boolean czyAktywneBicia() {
         return !aktywneBicia.isEmpty();
     }
-
+    
+    /**
+     * Szuka bic dla podanego gracza
+     * @param gracz
+     */
+    void szukajBic(Wlasciciel gracz) {
+        aktywneBicia.clear();
+        for(Pionek pionek : pionkiGracza.get(gracz)){
+            ArrayList<Bicie> bicia = pionek.szukajBicia(this);
+            aktywneBicia.addAll(bicia);
+        }
+    }
+    
     /**
      * tworzy pola na planszy z pionkami lub bez
      * 
@@ -47,8 +71,8 @@ public class Plansza {
      * @param numerWiersza
      */
     private void wypelnijWiersz(int numerWiersza) {
-        for (int j = 0; j < 8; j++)
-            plansza[numerWiersza][j] = new Pole();
+        for (int numerKolumny = 0; numerKolumny < 8; numerKolumny++)
+            plansza[numerWiersza][numerKolumny] = new Pole();
     }
 
     /**
@@ -60,12 +84,15 @@ public class Plansza {
      * @param numerWiersza
      */
     public void wypelnijWiersz(Wlasciciel gracz, int numerWiersza) {
-        for (int j = 0; j < 8; j++) {
+        for (int numerKolumny = 0; numerKolumny < 8; numerKolumny++) {
             // co drugie miejsce od poczatku stawiamy pionek
-            if (j % 2 == numerWiersza % 2)
-                plansza[numerWiersza][j] = new Pole();
-            else
-                plansza[numerWiersza][j] = new Pole(gracz);
+            if (numerKolumny % 2 == numerWiersza % 2)
+                plansza[numerWiersza][numerKolumny] = new Pole();
+            else {
+                plansza[numerWiersza][numerKolumny] = new Pole(gracz);
+                plansza[numerWiersza][numerKolumny].getP().setW(new Wspolrzedne(numerWiersza, numerKolumny));
+                pionkiGracza.get(gracz).add(plansza[numerWiersza][numerKolumny].getP());
+            }
         }
     }
 
