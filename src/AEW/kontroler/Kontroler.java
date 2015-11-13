@@ -1,5 +1,6 @@
 package AEW.kontroler;
 
+import java.util.HashMap;
 import java.util.concurrent.BlockingQueue;
 
 import AEW.events.Event;
@@ -10,6 +11,8 @@ public class Kontroler {
     private Model model;
     private Widok widok;
     private BlockingQueue<Event> kolejka;
+    /**mapa strategii - na podstawie klucza (Event wysylany przez View) wybiera wartosc (strategie ktora go obsluzy)*/
+	private HashMap<Class<? extends Event>, Strategie> mapaStrategii;
 
     /**
      * 
@@ -29,7 +32,23 @@ public class Kontroler {
      * Petla glowna kontrolera
      */
     public void start() {
-        // TODO
+    	while(true){
+			try{
+				Event event = kolejka.take();
+				//Strategie strategia = this.mapaStrategii.get(event.getClass());
+				//strategia.wykonajStrategie();
+			}
+			catch(InterruptedException e){
+				//nie obslugujemy bo kontroller ma poprostu czekac na eventy
+			}
+		}
     }
+    
+    /**
+	 * klasa bazowa po ktorej dziedzicza wszystkie strategie
+	 */
+	private abstract class Strategie{
+		abstract public void wykonajStrategie();
+	}
 
 }

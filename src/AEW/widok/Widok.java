@@ -1,6 +1,8 @@
 package AEW.widok;
 
 import java.awt.BorderLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.concurrent.BlockingQueue;
 
 import javax.swing.JFrame;
@@ -8,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import AEW.events.Event;
+import AEW.events.klikniecieEvent;
 import AEW.model.Plansza;
 
 public class Widok {
@@ -30,6 +33,29 @@ public class Widok {
         ramka.add(glownyPanel, BorderLayout.CENTER);
 
         glownyPanel.setVisible(true);
+        ramka.addMouseListener(new MouseListener(){
+			
+			@Override
+			public void mouseReleased(MouseEvent e){
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e){
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e){
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e){
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e){
+				kolejka.offer(new klikniecieEvent((e.getX() - e.getX()%100)/100,(e.getY() - e.getY()%100)/100));
+			}
+		});
         ramka.setVisible(true);
     }
 
