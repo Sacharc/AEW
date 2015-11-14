@@ -26,10 +26,10 @@ public class Model
 	
 	/**
 	 * Probuje wykonac ruch
-	 * @param x
-	 * @param y
+	 * @param pozycjaWejsciowa
+	 * @param pozycjaWyjsciowa
 	 */
-	public void ruch(Wspolrzedne w) {
+	public void ruch(final Wspolrzedne pozycjaWejsciowa, final Wspolrzedne pozycjaWyjsciowa) {
 	    //TODO
 	}
 	

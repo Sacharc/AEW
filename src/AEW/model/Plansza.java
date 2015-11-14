@@ -83,7 +83,7 @@ public class Plansza {
      * @param gracz
      * @param numerWiersza
      */
-    public void wypelnijWiersz(Wlasciciel gracz, int numerWiersza) {
+    private void wypelnijWiersz(Wlasciciel gracz, int numerWiersza) {
         for (int numerKolumny = 0; numerKolumny < 8; numerKolumny++) {
             // co drugie miejsce od poczatku stawiamy pionek
             if (numerKolumny % 2 == numerWiersza % 2)
@@ -109,7 +109,20 @@ public class Plansza {
         return null;
     }
 
+
     private boolean czyNalezy(int x, int y) {
         return x >= 0 && x < 8 && y >= 0 && y < 8;
+    }
+
+    /**
+     * Sprawdza czy pionek znajduje sie na liscie bic
+     * @param w Wspolrzedne pionka
+     * @return prawda jezeli pionek ma bicie
+     */
+    private boolean czyMaBicie(Wspolrzedne w) {
+        for(Bicie b : aktywneBicia)
+            if(b.getW().equals(w))
+                return true;
+        return false;
     }
 }
