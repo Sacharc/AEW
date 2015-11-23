@@ -6,11 +6,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import AEW.events.Event;
 import AEW.kontroler.Kontroler;
 import AEW.model.Model;
-import AEW.model.Plansza;
-import AEW.model.Pole;
 import AEW.model.Wlasciciel;
-import AEW.widok.PlanszaPanel;
-import AEW.widok.PolePanel;
 import AEW.widok.Widok;
 
 public class Warcaby {

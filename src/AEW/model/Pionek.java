@@ -24,11 +24,12 @@ public abstract class Pionek {
     abstract boolean czyMozeRuszyc();
     
     /**
-     * Wykonuje ruch. 
-     * @param x Do mo�liwej zmiany na kierunek np lewo prawo
-     * @param y
+     * Wykonuje ruch.
+     * @param punktDocelowy 
+     * @param plansza
+     * @return czy ruch sie powiodl
      */
-    abstract void ruch(final Wspolrzedne w);
+    abstract boolean ruch(final Wspolrzedne punktDocelowy, Plansza plansza);
     
     /**
      * Wykonuje bicie w kierunku k

@@ -72,7 +72,10 @@ public class Plansza {
      */
     private void wypelnijWiersz(int numerWiersza) {
         for (int numerKolumny = 0; numerKolumny < 8; numerKolumny++)
-            plansza[numerWiersza][numerKolumny] = new Pole();
+            if (numerKolumny % 2 == numerWiersza % 2)
+                plansza[numerWiersza][numerKolumny] = new Pole();
+            else
+                plansza[numerWiersza][numerKolumny] = new Pole(true);
     }
 
     /**
@@ -108,7 +111,15 @@ public class Plansza {
             return plansza[x][y];
         return null;
     }
-
+    
+    boolean czyWolne(Wspolrzedne wspolrzednePola) {
+        Pole pole = getPole(wspolrzednePola);
+        return pole.isEmpty() && pole.czyMoznaStanac();
+    }
+    
+    Pole getPole(Wspolrzedne w) {
+        return getPole(w.getX(), w.getY());
+    }
 
     private boolean czyNalezy(int x, int y) {
         return x >= 0 && x < 8 && y >= 0 && y < 8;
@@ -124,5 +135,25 @@ public class Plansza {
             if(b.getW().equals(w))
                 return true;
         return false;
+    }
+    
+    /**
+     * Wykonuje ruch/bicie
+     * @param pozycjaWejsciowa
+     * @param pozycjaWyjsciowa
+     * @return
+     */
+    boolean wykonajRuch(final Wspolrzedne pozycjaWejsciowa, final Wspolrzedne pozycjaWyjsciowa) {
+        Pionek p = getPole(pozycjaWejsciowa).getP();
+        if(p == null)
+            return false;
+        //jezeli istnieja bicia to musza byc wykonane
+        if(czyAktywneBicia()) {
+            if(czyMaBicie(pozycjaWejsciowa)) {
+                //TODO sprawdzic czy to co chce zrobic gracz jest biciem i wykonac
+            } else
+                return false;
+        }
+        return p.ruch(pozycjaWyjsciowa, this);
     }
 }

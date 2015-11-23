@@ -25,6 +25,10 @@ public class Wspolrzedne {
         this.y = y;
     }
     
+    /**
+     * Sprawdza czy wspolrzedne naleza do planszy
+     * @return true jezeli wspolrzedne sa poprawne
+     */
     public boolean czyPoprawne(){
         return x >= 0 && x < 8 && y >= 0 && y < 8;
     }

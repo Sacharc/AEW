@@ -5,21 +5,32 @@ package AEW.model;
  */
 public class Pole {
     Pionek p;
+    final boolean moznaStanac;
 
-    public Pole() {
-        p = null;
+    Pole() {
+        moznaStanac = false;
+    }
+
+    /**
+     * @param moznaStanac
+     */
+    Pole(boolean moznaStanac) {
+        this.moznaStanac = moznaStanac;
     }
 
     /**
      * tworzy pole z pionkiem
      * 
-     * @param gracz1
-     *            - wlasciciel pionka
+     * @param gracz1 - wlasciciel pionka
      */
-    public Pole(Wlasciciel gracz1) {
+    Pole(Wlasciciel gracz1) {
         p = new ZwyklyPionek(gracz1);
+        moznaStanac = true;
     }
 
+    /**
+     * @return pionek stoj¹cy na polu null jezeli puste
+     */
     public Pionek getP() {
         return p;
     }
@@ -28,6 +39,10 @@ public class Pole {
         this.p = p;
     }
     
+    boolean czyMoznaStanac() {
+        return moznaStanac;
+    }
+
     /**
      * Informuje czy pole jest puste
      * @return true jezeli puste

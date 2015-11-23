@@ -11,9 +11,9 @@ final class Damka extends Pionek {
     }
 
     @Override
-    void ruch(final Wspolrzedne w) {
+    boolean ruch(Wspolrzedne punktDocelowy, Plansza plansza) {
         // TODO Auto-generated method stub
-
+        return false;
     }
 
     @Override
@@ -27,5 +27,4 @@ final class Damka extends Pionek {
         // TODO Auto-generated method stub
         return null;
     }
-
 }
