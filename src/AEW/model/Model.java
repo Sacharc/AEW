@@ -1,5 +1,7 @@
 package AEW.model;
 
+import java.util.ArrayList;
+
 public class Model
 {
 	/**
@@ -25,14 +27,32 @@ public class Model
 	}
 	
 	/**
+     * 
+     * @return Zwraca listê wszystkich dostêpnych ruchów danego gracza
+     */
+    public ArrayList<Ruch> dostepneRuchy() {
+        //TODO
+        return null;
+    }
+	
+	/**
 	 * Probuje wykonac ruch
-	 * @param pozycjaWejsciowa
-	 * @param pozycjaWyjsciowa
+	 * @param ruch
 	 */
-	public void ruch(final Wspolrzedne pozycjaWejsciowa, final Wspolrzedne pozycjaWyjsciowa) {
+	public void wykonajRuch(final Ruch ruch) {
 	    //TODO
 	}
 	
+	/**
+	 * Sprawdza czy ruch jest na liscie i go wykonuje
+	 * @param ruch 
+	 * @return true jezeli wykonano
+	 */
+	public boolean sprawdzWykonajRuch(final Ruch ruch) {
+        return false;
+	    //TODO
+	}
+
 	/**
 	 * Sprawdza czy pionek moze zostac ruszony
 	 * Jezeli gracz ma bicie to musi je wykonac - nie moze ruszyc pionkiem nie majacym bicia
