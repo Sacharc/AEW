@@ -1,28 +1,52 @@
 package AEW.model;
 
 /**
- * Klasa reprezentuje ruch.
+ *
+ *
+ * @author Mateusz Skolimowki
  */
-public class Ruch {
-    final Wspolrzedne punktWejsciowy;
-    final Wspolrzedne punktWyjsciowy;
-    
-    /**
-     * @param punktWejsciowy
-     * @param punktWyjsciowy
-     */
-    public Ruch(Wspolrzedne punktWejsciowy, Wspolrzedne punktWyjsciowy) {
-        this.punktWejsciowy = punktWejsciowy;
-        this.punktWyjsciowy = punktWyjsciowy;
-    }
-
-
-    Wspolrzedne getPunktWejsciowy() {
-        return punktWejsciowy;
-    }
-
-
-    Wspolrzedne getPunktWyjsciowy() {
-        return punktWyjsciowy;
-    }
+public class Ruch
+{
+	private int x1;
+	private int y1;
+	private int x2;
+	private int y2;
+	
+	
+	/**
+	 * @param x1
+	 * @param y1
+	 * @param x2
+	 * @param y2
+	 *
+	 * @author Mateusz Skolimowski
+	 */
+	public Ruch(int x1, int y1, int x2, int y2)
+	{
+		this.x1 = x1;
+		this.y1 = y1;
+		this.x2 = x2;
+		this.y2 = y2;
+	}
+	
+	public int getX1()
+	{
+		return x1;
+	}
+	
+	public int getY1()
+	{
+		return y1;
+	}
+	
+	public int getX2()
+	{
+		return x2;
+	}
+	
+	public int getY2()
+	{
+		return y2;
+	}
+	
 }

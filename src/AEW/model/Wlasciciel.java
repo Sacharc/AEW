@@ -1,10 +1,11 @@
 package AEW.model;
 
 /**
- * Okresla kto jest wlascicielem pionka
- * @author Mmm
  *
+ *
+ * @author Mateusz Skolimowki
  */
-public enum Wlasciciel {
-    gracz1, gracz2, komputer;
+public enum Wlasciciel
+{
+	gracz1,gracz2;
 }

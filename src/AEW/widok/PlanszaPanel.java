@@ -28,10 +28,8 @@ public class PlanszaPanel extends JPanel
 	{	
 		this.plansza = plansza;
 		setLayout(new GridLayout(8, 8));
-		for(int i = 0 ; i < 8 ; i++)
-		{
-			for(int j = 0 ; j < 8 ; j++)
-			{
+		for(int i = 0 ; i < 8 ; i++){
+			for(int j = 0 ; j < 8 ; j++){
 				siatkaPaneli[i][j] = new PolePanel(plansza.getPole(i,j));
 				siatkaPaneli[i][j].setSize(100, 100);
 				if( i%2 == j%2 ) 

@@ -30,13 +30,18 @@ public class PolePanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        if (pole.getP() != null) {
+        if (pole.getPionek() != null) {
             Ellipse2D elip = new Ellipse2D.Double(12.5, 12.5, 75, 75);
-            if (pole.getP().getWlasciciel() == Wlasciciel.gracz1)
+            if (pole.getPionek().getWlasciciel() == Wlasciciel.gracz1)
                 g2d.setColor(Color.RED);
             else
                 g2d.setColor(Color.BLUE);
             g2d.fill(elip);
+            if(pole.getPionek().getCzyDamka()){
+            	Ellipse2D elip2 = new Ellipse2D.Double(37.5, 37.5, 25, 25);
+            	g2d.setColor(Color.BLACK);
+            	g2d.fill(elip2);
+            }
         }
     }
 

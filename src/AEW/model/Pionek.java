@@ -1,64 +1,48 @@
 package AEW.model;
 
-import java.util.ArrayList;
-
 /**
- * Abstrakcyjna klasa reprezentujaca pionek na planszy
-
+ *
+ *
+ * @author Mateusz Skolimowki
  */
-public abstract class Pionek {
-    
-    /**
-     * Okresla wlasciciela pionka
-     */
-    Wlasciciel wlasciciel;
-    /**
-     * Je¿eli siê nie przyda to do wywalenia narazie roboczo zostawiam
-     */
-    Wspolrzedne w;
+public class Pionek{
 
-    /**
-     * Sprawdza czy pionek moze sie ruszyc 
-     * @return True jezeli tak
-     */
-    abstract boolean czyMozeRuszyc();
-    
-    /**
-     * Wykonuje ruch.
-     * @param punktDocelowy 
-     * @param plansza
-     * @return czy ruch sie powiodl
-     */
-    abstract boolean ruch(final Wspolrzedne punktDocelowy, Plansza plansza);
-    
-    /**
-     * Wykonuje bicie w kierunku k
-     * @param k kierunek bicia
-     * @return Krotnosc bicia
-     */
-    abstract int wykonajBicie(final Kierunek k);
-    
-    /**
-     * Szuka bic danego pionka
-     * @param p
-     * @return Lista bic
-     */
-    abstract ArrayList<Bicie> szukajBicia(Plansza p);
+	private boolean czyDamka;
+	/**
+	 * @return the czyDamka
+	 */
+	public boolean getCzyDamka()
+	{
+		return czyDamka;
+	}
 
-    public Wlasciciel getWlasciciel() {
-        return wlasciciel;
-    }
+	private Wlasciciel gracz;
+	
+	/**
+	 * @param gracz1
+	 *
+	 * @author Mateusz Skolimowski
+	 */
+	public Pionek(Wlasciciel gracz){
+		this.gracz = gracz;
+		czyDamka = false;
+	}
 
-    void setWlasciciel(Wlasciciel wlasciciel) {
-        this.wlasciciel = wlasciciel;
-    }
+	/**
+	 * @param czyDamka the czyDamka to set
+	 */
+	public void setCzyDamka(boolean czyDamka)
+	{
+		this.czyDamka = czyDamka;
+	}
 
-    Wspolrzedne getW() {
-        return w;
-    }
-
-    void setW(Wspolrzedne w) {
-        this.w = w;
-    }
-
+	/**
+	 * @return
+	 *
+	 * @author Mateusz Skolimowski
+	 */
+	public Wlasciciel getWlasciciel()
+	{
+		return gracz;
+	}
 }

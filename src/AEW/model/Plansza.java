@@ -1,159 +1,347 @@
 package AEW.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+/**
+ *
+ *
+ * @author Mateusz Skolimowki
+ */
+public class Plansza{
+	
+	private List <Ruch> listaRuchow = new <Ruch>ArrayList();
+	private List <Bicie> listaBic = new <Bicie>ArrayList();
+	
+	private Pole pola[][];
 
-public class Plansza {
-    public Pole[][] plansza = new Pole[8][8];
-    
-    private ArrayList<Bicie> aktywneBicia;
-    /** Mapa setow pionkow*/
-    private Map<Wlasciciel, Set<Pionek>> pionkiGracza;
+	/**
+	 * @param gracz1
+	 * @param gracz2
+	 *
+	 * @author Mateusz Skolimowski
+	 */
+	public Plansza(Wlasciciel gracz1, Wlasciciel gracz2)
+	{
+		initPola();
+		for(int i = 0 ; i < 8 ; i++){
+			if(i<3){
+				if(i%2==0){
+					wypelnijLinieParzysta(i,gracz1);
+				}
+				else{
+					wypelnijLinieNieParzysta(i,gracz1);
+				}
+			}
+			if(i>4){
+				if(i%2==0){
+					wypelnijLinieParzysta(i,gracz2);
+				}
+				else{
+					wypelnijLinieNieParzysta(i,gracz2);
+				}
+			}
+		}
+	}
+	
+	private void initPola(){
+		this.pola = new Pole[8][8];
+		for(int i = 0 ; i < 8 ; i ++ ){
+			for(int j = 0 ; j < 8 ; j ++){
+				this.pola[i][j] = new Pole(i,j);
+			}
+		}
+	}
+	
+	private void wypelnijLinieParzysta(int i, Wlasciciel gracz1){
+		for(int j = 0 ; j<4 ; j++){
+			this.pola[i][2*j+1].addPionek(gracz1);
+		}
+	}
+	
+	private void wypelnijLinieNieParzysta(int i, Wlasciciel gracz1){
+		for(int j = 0 ; j<4 ; j++){
+			this.pola[i][2*j].addPionek(gracz1);
+		}
+	}
+	
+	public void wypisz(){
+		for(Pole[] linia : this.pola){
+			for(Pole p : linia){
+				if(p.getPionek()!=null)
+					System.out.print("X");
+				else
+					System.out.print(" ");
+			}
+			System.out.println();
+		}
+	}
 
-    /**
-     * konstruktor inicjujacy pola na planszy
-     * 
-     * @param gracz1
-     * @param gracz2
-     */
-    Plansza(Wlasciciel gracz1, Wlasciciel gracz2) {
-        pionkiGracza = new TreeMap<>();
-        pionkiGracza.put(gracz1, new HashSet<Pionek>());
-        pionkiGracza.put(gracz2, new HashSet<Pionek>());
-        ustawPionki(gracz1, gracz2);
-        aktywneBicia = new ArrayList<Bicie>();
-    }
-    
-    /**
-     * Sprawdza czy lista bic jest pusta
-     * @return true jezeli lista bic jest pusta
-     */
-    boolean czyAktywneBicia() {
-        return !aktywneBicia.isEmpty();
-    }
-    
-    /**
-     * Szuka bic dla podanego gracza
-     * @param gracz
-     */
-    void szukajBic(Wlasciciel gracz) {
-        aktywneBicia.clear();
-        for(Pionek pionek : pionkiGracza.get(gracz)){
-            ArrayList<Bicie> bicia = pionek.szukajBicia(this);
-            aktywneBicia.addAll(bicia);
-        }
-    }
-    
-    /**
-     * tworzy pola na planszy z pionkami lub bez
-     * 
-     * @param gracz1
-     * @param gracz2
-     */
-    private void ustawPionki(Wlasciciel gracz1, Wlasciciel gracz2) {
-        for (int i = 0; i < 8; i++) {
-            if (i < 3)
-                wypelnijWiersz(gracz1, i);
-            else if (i > 4)
-                wypelnijWiersz(gracz2, i);
-            else
-                wypelnijWiersz(i);
-        }
-    }
+	public void zmienPolozeniePionka(int x1,int y1, int x2, int y2){
+		boolean czyBylDamka = false;
+		if(pola[x1][y1].getPionek().getCzyDamka())
+			czyBylDamka = true;
+		Wlasciciel gracz = pola[x1][y1].removePionek();
+		pola[x2][y2].addPionek(gracz);
+		if(x2 == 7 || czyBylDamka){
+			System.out.println("EEEE DAMKA");
+			pola[x2][y2].getPionek().setCzyDamka(true);
+		}
+	}
+	
+	/**
+	 * @param i
+	 * @param j
+	 * @return
+	 *
+	 * @author Mateusz Skolimowski
+	 */
+	public Pole getPole(int i, int j)
+	{
+		return this.pola[i][j];
+	}
+	
+	public void czyscListyRuchowBic(){
+		listaRuchow = new <Ruch>ArrayList();
+		listaBic = new <Bicie>ArrayList();
+	}
 
-    /**
-     * wypelnia wiersz pustymi polami
-     * 
-     * @param numerWiersza
-     */
-    private void wypelnijWiersz(int numerWiersza) {
-        for (int numerKolumny = 0; numerKolumny < 8; numerKolumny++)
-            if (numerKolumny % 2 == numerWiersza % 2)
-                plansza[numerWiersza][numerKolumny] = new Pole();
-            else
-                plansza[numerWiersza][numerKolumny] = new Pole(true);
-    }
+	/**
+	 * 
+	 *
+	 * @author Mateusz Skolimowski
+	 * @param aktualnyGracz 
+	 */
+	public void sprawdzDostepneRuchy(Wlasciciel aktualnyGracz)
+	{
+		for(Pole[] linia : this.pola){
+			for(Pole p : linia){
+				if(p.getPionek()!=null){
+					if(p.getPionek().getWlasciciel() == aktualnyGracz){
+						sprawdzBiciaRuchyPionka(p);
+					}
+				}
+			}
+		}
+	}
+	
+	public void sprawdzBiciaRuchyPionka(Pole p){
+		/* sprawdzamy ruchy w lewo */
+		if(p.getY() != 0){
+			//pojedynczy ruch w dol lewo
+			if(p.getX() != 7 && this.pola[p.getX()+1][p.getY()-1].getPionek() == null){
+				listaRuchow.add(new Ruch(p.getX(),p.getY(),p.getX()+1,p.getY()-1));
+			}
+			//sprawdzamy czy jest damka
+			if(p.getPionek().getCzyDamka()){
+				//sprawdzamy wieloktorny ruch w dol lewo
+				int x=p.getX()+2;
+				int y=p.getY()-2;
+				while(x <= 7 && y >= 0 && this.pola[x][y].getPionek() == null){
+					listaRuchow.add(new Ruch(p.getX(),p.getY(),x,y));
+					x++;
+					y--;
+				}
+				//sprawdzamy wielokrotny ruch w gore prawo
+				if(p.getX()>0){
+					x=p.getX()-1;
+					y=p.getY()-1;
+					while(x >= 0 && y >= 0 && this.pola[x][y].getPionek() == null){
+						listaRuchow.add(new Ruch(p.getX(),p.getY(),x,y));
+						x--;
+						y--;
+					}
+				}
+			}
+			if(p.getX() < 6 && p.getY() > 1){
+				if(this.pola[p.getX()+1][p.getY()-1].getPionek() != null && p.getPionek().getWlasciciel() != pola[p.getX()+1][p.getY()-1].getPionek().getWlasciciel() && this.pola[p.getX()+2][p.getY()-2].getPionek() == null){
+					listaBic.add(new Bicie(p.getX(),p.getY(),p.getX()+2,p.getY()-2));
+					
+				}
+				else if(p.getPionek().getCzyDamka()){
+					int x = p.getX()+2;
+					int y = p.getY()-2;
+					while(x <= 6 && y >= 1){
+						if(this.pola[x][y].getPionek() != null && p.getPionek().getWlasciciel() != pola[x][y].getPionek().getWlasciciel() && this.pola[x+1][y-1].getPionek() == null){
+							listaBic.add(new Bicie(p.getX(),p.getY(),x+1,y-1));
+							break;
+						}
+						x++;
+						y--;
+					}
+				}
+			}
+			if(p.getX() > 1 && p.getY() > 1){
+				if(this.pola[p.getX()-1][p.getY()-1].getPionek() != null && p.getPionek().getWlasciciel() != pola[p.getX()-1][p.getY()-1].getPionek().getWlasciciel() && this.pola[p.getX()-2][p.getY()-2].getPionek() == null){
+					listaBic.add(new Bicie(p.getX(),p.getY(),p.getX()-2,p.getY()-2));
+				}
+				else if(p.getPionek().getCzyDamka()){
+					int x = p.getX()-2;
+					int y = p.getY()-2;
+					while(x >= 1 && y >= 1){
+						if(this.pola[x][y].getPionek() != null && p.getPionek().getWlasciciel() != pola[x][y].getPionek().getWlasciciel() && this.pola[x-1][y-1].getPionek() == null){
+							listaBic.add(new Bicie(p.getX(),p.getY(),x-1,y-1));
+							break;
+						}
+						x--;
+						y--;
+					}
+				}
+			}
+		}
+		/* sprawdzamy ruch w prawo */ 
+		if(p.getY() != 7){
+			//pojedyncz ruch w prawo dol
+			if(p.getX() != 7 && this.pola[p.getX()+1][p.getY()+1].getPionek() == null)
+				listaRuchow.add(new Ruch(p.getX(),p.getY(),p.getX()+1,p.getY()+1));
+			if(p.getPionek().getCzyDamka()){
+				//wielokrotny ruch w prawo dol
+				int x=p.getX()+2;
+				int y=p.getY()+2;
+				while(x <= 7 && y <= 7 && this.pola[x][y].getPionek() == null){
+					System.out.println("wchodze x="+x+" y="+y);
+					listaRuchow.add(new Ruch(p.getX(),p.getY(),x,y));
+					x++;
+					y++;
+				}
+				//wielokrotny ruch w prawo gore
+				if(p.getX() > 0){
+					x=p.getX()-1;
+					y=p.getY()+1;
+					while(x >= 0 && y <= 7 && this.pola[x][y].getPionek() == null){
+						listaRuchow.add(new Ruch(p.getX(),p.getY(),x,y));
+						x--;
+						y++;
+					}
+				}
+			}
+			if(p.getX() < 6 && p.getY() < 6){
+				if(this.pola[p.getX()+1][p.getY()+1].getPionek() != null && p.getPionek().getWlasciciel() != pola[p.getX()+1][p.getY()+1].getPionek().getWlasciciel() && this.pola[p.getX()+2][p.getY()+2].getPionek() == null){
+					listaBic.add(new Bicie(p.getX(),p.getY(),p.getX()+2,p.getY()+2));
+				}
+				else if(p.getPionek().getCzyDamka()){
+					int x = p.getX()+2;
+					int y = p.getY()+2;
+					while(x <= 6 && y <= 6){
+						if(this.pola[x][y].getPionek() != null && p.getPionek().getWlasciciel() != pola[x][y].getPionek().getWlasciciel() && this.pola[x+1][y+1].getPionek() == null){
+							listaBic.add(new Bicie(p.getX(),p.getY(),x+1,y+1));
+							break;
+						}
+						x++;
+						y++;
+					}
+				}
+			}
+			if(p.getX() > 1 && p.getY() < 6){
+				if(this.pola[p.getX()-1][p.getY()+1].getPionek() != null && p.getPionek().getWlasciciel() != pola[p.getX()-1][p.getY()+1].getPionek().getWlasciciel() && this.pola[p.getX()-2][p.getY()+2].getPionek() == null){
+					listaBic.add(new Bicie(p.getX(),p.getY(),p.getX()-2,p.getY()+2));
+				}
+				else if(p.getPionek().getCzyDamka()){
+					int x = p.getX()-2;
+					int y = p.getY()+2;
+					while(x >= 1 && y <= 6){
+						if(this.pola[x][y].getPionek() != null && p.getPionek().getWlasciciel() != pola[x][y].getPionek().getWlasciciel() && this.pola[x-1][y+1].getPionek() == null){
+							listaBic.add(new Bicie(p.getX(),p.getY(),x-1,y+1));
+							break;
+						}
+						x--;
+						y++;
+					}
+				}
+			}
+		}
+	}
+	/**
+	 * @return
+	 *
+	 * @author Mateusz Skolimowski
+	 */
+	public boolean sprawdzCzyKoniecGry()
+	{
+		boolean czyJestPionekGracza1 = false;
+		boolean czyJestPionekGracza2 = false;
+		for(Pole[] linia : this.pola){
+			for(Pole p : linia){
+				if(p.getPionek() != null){
+					if(p.getPionek().getWlasciciel() == Wlasciciel.gracz1){
+						czyJestPionekGracza1 = true;
+					}
+					if(p.getPionek().getWlasciciel() == Wlasciciel.gracz2){
+						czyJestPionekGracza2 = true;
+					}
+				}
+			}
+		}
+		return czyJestPionekGracza1 && czyJestPionekGracza2;
+	}
 
-    /**
-     * wypelnia wiersz pionkami i pustymi polami. Dla wierszy parzystych
-     * uzueplnia od pierwszego pola. dla nieparzystych uzupelnia od drugiego
-     * pola.
-     * 
-     * @param gracz
-     * @param numerWiersza
-     */
-    private void wypelnijWiersz(Wlasciciel gracz, int numerWiersza) {
-        for (int numerKolumny = 0; numerKolumny < 8; numerKolumny++) {
-            // co drugie miejsce od poczatku stawiamy pionek
-            if (numerKolumny % 2 == numerWiersza % 2)
-                plansza[numerWiersza][numerKolumny] = new Pole();
-            else {
-                plansza[numerWiersza][numerKolumny] = new Pole(gracz);
-                plansza[numerWiersza][numerKolumny].getP().setW(new Wspolrzedne(numerWiersza, numerKolumny));
-                pionkiGracza.get(gracz).add(plansza[numerWiersza][numerKolumny].getP());
-            }
-        }
-    }
+	/**
+	 * 
+	 *
+	 * @author Mateusz Skolimowski
+	 */
+	public void zmianaWspolrzednych()
+	{
+		Pole[][] zmienionaPlansza = new Pole[8][8];
+		for(int i = 0 ; i < 8 ; i ++ ){
+			for(int j = 0 ; j < 8 ; j ++){
+				zmienionaPlansza[i][j] = new Pole(i,j);
+			}
+		}
+		for(Pole[] linia : this.pola){
+			for(Pole p : linia){
+				if(p.getPionek()!=null){
+					zmienionaPlansza[7-p.getX()][7-p.getY()].addPionek(p.getPionek().getWlasciciel());
+					if(p.getPionek().getCzyDamka())
+						zmienionaPlansza[7-p.getX()][7-p.getY()].getPionek().setCzyDamka(true);
+				}
+			}
+		}
+		this.pola = zmienionaPlansza;
+	}
 
-    /**
-     * Zwraca pole o podonach wspolrzednych
-     * 
-     * @param x
-     * @param y
-     * @return Pole (x, y) lub null jezeli wspolrzedne nie naleza do planszy
-     */
-    public Pole getPole(int x, int y) {
-        if (czyNalezy(x, y))
-            return plansza[x][y];
-        return null;
-    }
-    
-    boolean czyWolne(Wspolrzedne wspolrzednePola) {
-        Pole pole = getPole(wspolrzednePola);
-        return pole.isEmpty() && pole.czyMoznaStanac();
-    }
-    
-    Pole getPole(Wspolrzedne w) {
-        return getPole(w.getX(), w.getY());
-    }
+	/**
+	 * @return
+	 *
+	 * @author Mateusz Skolimowski
+	 */
+	public List <Bicie> getListaBic()
+	{
+		return listaBic;
+	}
+	
+	/**
+	 * @return
+	 *
+	 * @author Mateusz Skolimowski
+	 */
+	public List <Ruch> getListaRuchu()
+	{
+		return listaRuchow;
+	}
 
-    private boolean czyNalezy(int x, int y) {
-        return x >= 0 && x < 8 && y >= 0 && y < 8;
-    }
+	/**
+	 * 
+	 *
+	 * @author Mateusz Skolimowski
+	 */
+	public void wypiszBicia()
+	{
+		for(Bicie b : listaBic){
+			System.out.println(b.getX1()+";"+b.getY1()+"   "+b.getX2()+";"+b.getY2());
+		}
+	}
 
-    /**
-     * Sprawdza czy pionek znajduje sie na liscie bic
-     * @param w Wspolrzedne pionka
-     * @return prawda jezeli pionek ma bicie
-     */
-    private boolean czyMaBicie(Wspolrzedne w) {
-        for(Bicie b : aktywneBicia)
-            if(b.getW().equals(w))
-                return true;
-        return false;
-    }
-    
-    /**
-     * Wykonuje ruch/bicie
-     * @param pozycjaWejsciowa
-     * @param pozycjaWyjsciowa
-     * @return
-     */
-    boolean wykonajRuch(final Wspolrzedne pozycjaWejsciowa, final Wspolrzedne pozycjaWyjsciowa) {
-        Pionek p = getPole(pozycjaWejsciowa).getP();
-        if(p == null)
-            return false;
-        //jezeli istnieja bicia to musza byc wykonane
-        if(czyAktywneBicia()) {
-            if(czyMaBicie(pozycjaWejsciowa)) {
-                //TODO sprawdzic czy to co chce zrobic gracz jest biciem i wykonac
-            } else
-                return false;
-        }
-        return p.ruch(pozycjaWyjsciowa, this);
-    }
+	/**
+	 * 
+	 *
+	 * @author Mateusz Skolimowski
+	 */
+	public void wypiszRuchy()
+	{
+		for(Ruch r : listaRuchow){
+			System.out.println(r.getX1()+";"+r.getY1()+"   "+r.getX2()+";"+r.getY2());
+		}
+	}
+
 }

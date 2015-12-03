@@ -1,36 +1,57 @@
 package AEW.model;
 
 /**
- * Przechowuje informacje o biciu tzn wspolrzedne pionka i kierunek
+ *
+ *
+ * @author Mateusz Skolimowki
  */
-class Bicie {
-    /** Kierunek ruchu*/
-    final private Kierunek k;
-    /** Wspolrzedne z ktorych nastepuje ruch */
-    final private Wspolrzedne w;
+public class Bicie
+{
+	private int x1;
+	private int y1;
+	private int x2;
+	private int y2;
+	
+	
+	/**
+	 * @param x1
+	 * @param y1
+	 * @param x2
+	 * @param y2
+	 *
+	 * @author Mateusz Skolimowski
+	 */
+	public Bicie(int x1, int y1, int x2, int y2)
+	{
+		this.x1 = x1;
+		this.y1 = y1;
+		this.x2 = x2;
+		this.y2 = y2;
+	}
 
-    /**
-     * @param k kierunek w 
-     * @param w Wspolrzedne z ktorych nastepuje ruch
-     */
-    Bicie(Kierunek k, Wspolrzedne w) {
-        super();
-        this.k = k;
-        this.w = w;
-    }
 
-    /**
-     * @return the k
-     */
-    final Kierunek getK() {
-        return k;
-    }
-
-    /**
-     * @return the w
-     */
-    final Wspolrzedne getW() {
-        return w;
-    }
-
+	/**
+	 * @return
+	 *
+	 * @author Mateusz Skolimowski
+	 */
+	public int getX1()
+	{
+		return x1;
+	}
+	
+	public int getY1()
+	{
+		return y1;
+	}
+	
+	public int getX2()
+	{
+		return x2;
+	}
+	
+	public int getY2()
+	{
+		return y2;
+	}
 }
