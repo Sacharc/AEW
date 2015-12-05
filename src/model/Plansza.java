@@ -11,7 +11,7 @@ import java.util.List;
 public class Plansza{
 	
 	private List <Ruch> listaRuchow = new <Ruch>ArrayList();
-	private List <Bicie> listaBic = new <Bicie>ArrayList();
+	private List <Ruch> listaBic = new <Ruch>ArrayList();
 	
 	private Pole pola[][];
 
@@ -103,7 +103,7 @@ public class Plansza{
 	
 	public void czyscListyRuchowBic(){
 		listaRuchow = new <Ruch>ArrayList();
-		listaBic = new <Bicie>ArrayList();
+		listaBic = new <Ruch>ArrayList();
 	}
 
 	/**
@@ -155,7 +155,7 @@ public class Plansza{
 			}
 			if(p.getX() < 6 && p.getY() > 1){
 				if(this.pola[p.getX()+1][p.getY()-1].getPionek() != null && p.getPionek().getWlasciciel() != pola[p.getX()+1][p.getY()-1].getPionek().getWlasciciel() && this.pola[p.getX()+2][p.getY()-2].getPionek() == null){
-					listaBic.add(new Bicie(p.getX(),p.getY(),p.getX()+2,p.getY()-2));
+					listaBic.add(new Ruch(p.getX(),p.getY(),p.getX()+2,p.getY()-2));
 					
 				}
 				else if(p.getPionek().getCzyDamka()){
@@ -163,7 +163,7 @@ public class Plansza{
 					int y = p.getY()-2;
 					while(x <= 6 && y >= 1){
 						if(this.pola[x][y].getPionek() != null && p.getPionek().getWlasciciel() != pola[x][y].getPionek().getWlasciciel() && this.pola[x+1][y-1].getPionek() == null){
-							listaBic.add(new Bicie(p.getX(),p.getY(),x+1,y-1));
+							listaBic.add(new Ruch(p.getX(),p.getY(),x+1,y-1));
 							break;
 						}
 						x++;
@@ -173,14 +173,14 @@ public class Plansza{
 			}
 			if(p.getX() > 1 && p.getY() > 1){
 				if(this.pola[p.getX()-1][p.getY()-1].getPionek() != null && p.getPionek().getWlasciciel() != pola[p.getX()-1][p.getY()-1].getPionek().getWlasciciel() && this.pola[p.getX()-2][p.getY()-2].getPionek() == null){
-					listaBic.add(new Bicie(p.getX(),p.getY(),p.getX()-2,p.getY()-2));
+					listaBic.add(new Ruch(p.getX(),p.getY(),p.getX()-2,p.getY()-2));
 				}
 				else if(p.getPionek().getCzyDamka()){
 					int x = p.getX()-2;
 					int y = p.getY()-2;
 					while(x >= 1 && y >= 1){
 						if(this.pola[x][y].getPionek() != null && p.getPionek().getWlasciciel() != pola[x][y].getPionek().getWlasciciel() && this.pola[x-1][y-1].getPionek() == null){
-							listaBic.add(new Bicie(p.getX(),p.getY(),x-1,y-1));
+							listaBic.add(new Ruch(p.getX(),p.getY(),x-1,y-1));
 							break;
 						}
 						x--;
@@ -217,14 +217,14 @@ public class Plansza{
 			}
 			if(p.getX() < 6 && p.getY() < 6){
 				if(this.pola[p.getX()+1][p.getY()+1].getPionek() != null && p.getPionek().getWlasciciel() != pola[p.getX()+1][p.getY()+1].getPionek().getWlasciciel() && this.pola[p.getX()+2][p.getY()+2].getPionek() == null){
-					listaBic.add(new Bicie(p.getX(),p.getY(),p.getX()+2,p.getY()+2));
+					listaBic.add(new Ruch(p.getX(),p.getY(),p.getX()+2,p.getY()+2));
 				}
 				else if(p.getPionek().getCzyDamka()){
 					int x = p.getX()+2;
 					int y = p.getY()+2;
 					while(x <= 6 && y <= 6){
 						if(this.pola[x][y].getPionek() != null && p.getPionek().getWlasciciel() != pola[x][y].getPionek().getWlasciciel() && this.pola[x+1][y+1].getPionek() == null){
-							listaBic.add(new Bicie(p.getX(),p.getY(),x+1,y+1));
+							listaBic.add(new Ruch(p.getX(),p.getY(),x+1,y+1));
 							break;
 						}
 						x++;
@@ -234,14 +234,14 @@ public class Plansza{
 			}
 			if(p.getX() > 1 && p.getY() < 6){
 				if(this.pola[p.getX()-1][p.getY()+1].getPionek() != null && p.getPionek().getWlasciciel() != pola[p.getX()-1][p.getY()+1].getPionek().getWlasciciel() && this.pola[p.getX()-2][p.getY()+2].getPionek() == null){
-					listaBic.add(new Bicie(p.getX(),p.getY(),p.getX()-2,p.getY()+2));
+					listaBic.add(new Ruch(p.getX(),p.getY(),p.getX()-2,p.getY()+2));
 				}
 				else if(p.getPionek().getCzyDamka()){
 					int x = p.getX()-2;
 					int y = p.getY()+2;
 					while(x >= 1 && y <= 6){
 						if(this.pola[x][y].getPionek() != null && p.getPionek().getWlasciciel() != pola[x][y].getPionek().getWlasciciel() && this.pola[x-1][y+1].getPionek() == null){
-							listaBic.add(new Bicie(p.getX(),p.getY(),x-1,y+1));
+							listaBic.add(new Ruch(p.getX(),p.getY(),x-1,y+1));
 							break;
 						}
 						x--;
@@ -305,7 +305,7 @@ public class Plansza{
 	 *
 	 * @author Mateusz Skolimowski
 	 */
-	public List <Bicie> getListaBic()
+	public List <Ruch> getListaBic()
 	{
 		return listaBic;
 	}
@@ -327,7 +327,7 @@ public class Plansza{
 	 */
 	public void wypiszBicia()
 	{
-		for(Bicie b : listaBic){
+		for(Ruch b : listaBic){
 			System.out.println(b.getX1()+";"+b.getY1()+"   "+b.getX2()+";"+b.getY2());
 		}
 	}
