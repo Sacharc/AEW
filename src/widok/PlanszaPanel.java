@@ -1,13 +1,11 @@
-package AEW.widok;
+package widok;
 
 import java.awt.Color;
 import java.awt.GridLayout;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import AEW.model.Plansza;
-import AEW.model.Pole;
+import model.Plansza;
 
 /**
  * plansza do wyswietlania pol z pionkami

@@ -1,4 +1,4 @@
-package AEW.model;
+package model;
 
 /**
  *

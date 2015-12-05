@@ -1,6 +1,6 @@
-package AEW.ai.algorytmEwolucyjny;
+package ai.algorytmEwolucyjny;
 
-import AEW.ai.Komputer;
+import ai.Komputer;
 
 public class KomputerEwolucyjny extends Komputer {
 

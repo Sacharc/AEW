@@ -1,16 +1,14 @@
-package AEW.widok;
+package widok;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
 
 import javax.swing.JPanel;
 
-import AEW.model.Pole;
-import AEW.model.Wlasciciel;
+import model.Pole;
+import model.Wlasciciel;
 
 /**
  * klasa do reprezentacji wizualnej jednego pola

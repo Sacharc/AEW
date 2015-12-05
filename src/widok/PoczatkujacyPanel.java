@@ -1,13 +1,9 @@
-package AEW.widok;
-
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridLayout;
+package widok;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import AEW.model.Plansza;
+import model.Plansza;
 
 /**
  *

@@ -1,13 +1,12 @@
-package AEW.ai.losowy;
+package ai.algorytmMinMax;
 
-import AEW.ai.Komputer;
+import ai.Komputer;
 
-public class KomputerLosowy extends Komputer{
+public class KoputerMinMax extends Komputer {
 
     @Override
     public void update() {
         // TODO Auto-generated method stub
         
     }
-
 }
