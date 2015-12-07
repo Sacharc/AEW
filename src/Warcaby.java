@@ -5,6 +5,15 @@ import model.Model;
 import model.Wlasciciel;
 import widok.Widok;
 
+/**
+ B³êdy
+ Gra powinna sie konczyc jezeli ktorys z graczy nie ma ruchu
+ Damki przeskakuja swoje pionki
+ Damki przeskakuja kilka pionkow przeciwnika bijac ostatni co pozwala im pobic caly rzad
+ Damki po biciu staja dokladnie za pioniem przeciwnika a moga stanac gdzie chca - DO ROZWAZENIA
+ */
+
+
 public class Warcaby {
 
     public static void main(String[] args) {
