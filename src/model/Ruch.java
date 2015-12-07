@@ -48,5 +48,25 @@ public class Ruch
 	{
 		return y2;
 	}
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Ruch other = (Ruch) obj;
+        if (x1 != other.x1)
+            return false;
+        if (x2 != other.x2)
+            return false;
+        if (y1 != other.y1)
+            return false;
+        if (y2 != other.y2)
+            return false;
+        return true;
+    }
 	
 }

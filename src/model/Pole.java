@@ -18,7 +18,15 @@ public class Pole{
 		
 	}
 	
-	/**
+	public Pole(Pole pole) {
+	    this.x = pole.x;
+        this.y = pole.y;
+        if(pole.pionek != null)
+            this.pionek = new Pionek(pole.pionek);
+            
+    }
+
+    /**
 	 * @param gracz1
 	 *
 	 * @author Mateusz Skolimowski

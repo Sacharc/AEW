@@ -1,3 +1,6 @@
+
+import ai.Komputer;
+import ai.losowy.KomputerLosowy;
 import model.Model;
 import model.Wlasciciel;
 import widok.Widok;
@@ -9,34 +12,37 @@ public class Warcaby {
     	for(int i = 0 ; i < 10 ; i++){
         Model model = new Model();
         Widok widok = new Widok();
+        Komputer komputer1 = new KomputerLosowy(model);
+        Komputer komputer2 = new KomputerLosowy(model);
         Wlasciciel aktualnyGracz = Wlasciciel.gracz1;
         widok.uaktualnij(model.getPlansza());
         while(model.getPlansza().sprawdzCzyKoniecGry()){
-        	if(aktualnyGracz == Wlasciciel.gracz2)
-         		model.zmianaWspolrzednych();
-        	model.sprawdzDostepneRuchy(aktualnyGracz);
-        	if(model.getPlansza().getListaBic().size() > 0){
-        		while(model.wykonajBicie()){
-        			widok.uaktualnij(model.getPlansza());
-        		}
+            
+        	switch(aktualnyGracz) {
+        	case gracz1:
+        	    model.sprawdzDostepneRuchy(aktualnyGracz);
+        	    while(komputer1.update())
+        	        widok.uaktualnij(model.getPlansza());
+        	    widok.uaktualnij(model.getPlansza());
+        	    aktualnyGracz = Wlasciciel.gracz2;
+        	    break;
+        	case gracz2:
+        	    model.zmianaWspolrzednych();
+        	    model.sprawdzDostepneRuchy(aktualnyGracz);
+        	    while(komputer2.update());
+                    //widok.uaktualnij(model.getPlansza()); //do mocnego przemyslenia bo trzeba by bylo zmieniac strony dwukrotni tzn przed i po
+        	    model.zmianaWspolrzednych();
+        	    widok.uaktualnij(model.getPlansza());
+        	    aktualnyGracz = Wlasciciel.gracz1;
+        	    break;
         	}
-        	else{
-        		if(model.getPlansza().getListaRuchu().size() > 0)
-            	model.wykonajRuch();
-        	}
-        	if(aktualnyGracz == Wlasciciel.gracz2)
-         		model.zmianaWspolrzednych();
         	model.czyscListy();
-        	widok.uaktualnij(model.getPlansza());
-        	if(aktualnyGracz == Wlasciciel.gracz1)
-         		aktualnyGracz = Wlasciciel.gracz2;
-         	else
-         		aktualnyGracz = Wlasciciel.gracz1;
-        	/*try {
-        	    Thread.sleep(10);                 //1000 milliseconds is one second.
+        	
+        	try {
+        	    Thread.sleep(700);                 //1000 milliseconds is one second.
         	} catch(InterruptedException ex) {
         	    Thread.currentThread().interrupt();
-        	}*/
+        	}
         	
         }
         widok.zamknij();

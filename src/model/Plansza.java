@@ -44,6 +44,13 @@ public class Plansza{
 		}
 	}
 	
+	public Plansza(Plansza p) {
+	    this.pola = new Pole[8][8];
+	    for(int i = 0; i < 8; i++)
+	        for(int j = 0; j < 8; j++)
+                this.pola[i][j] = new Pole(p.pola[i][j]);
+	}
+	
 	private void initPola(){
 		this.pola = new Pole[8][8];
 		for(int i = 0 ; i < 8 ; i ++ ){
@@ -318,6 +325,16 @@ public class Plansza{
 	public List <Ruch> getListaRuchu()
 	{
 		return listaRuchow;
+	}
+	
+	public List <Ruch> getMozliweRuchy() {
+	    if(listaBic.isEmpty())
+	        return listaRuchow;
+	    return listaBic;
+	}
+	
+	public int getLiczbaRuchow() {
+	    return getMozliweRuchy().size();
 	}
 
 	/**

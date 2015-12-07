@@ -7,7 +7,19 @@ package model;
  */
 public class Pionek{
 
+    private Wlasciciel gracz;
 	private boolean czyDamka;
+	
+    public Pionek(Wlasciciel gracz){
+        this.gracz = gracz;
+        czyDamka = false;
+    }
+
+    public Pionek(Pionek pionek) {
+        this.gracz = pionek.gracz;
+        this.czyDamka = pionek.czyDamka;
+    }
+	
 	/**
 	 * @return the czyDamka
 	 */
@@ -16,19 +28,7 @@ public class Pionek{
 		return czyDamka;
 	}
 
-	private Wlasciciel gracz;
-	
-	/**
-	 * @param gracz1
-	 *
-	 * @author Mateusz Skolimowski
-	 */
-	public Pionek(Wlasciciel gracz){
-		this.gracz = gracz;
-		czyDamka = false;
-	}
-
-	/**
+    /**
 	 * @param czyDamka the czyDamka to set
 	 */
 	public void setCzyDamka(boolean czyDamka)
