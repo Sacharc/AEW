@@ -11,9 +11,8 @@ public class KoputerMinMax extends Komputer {
     }
 
     @Override
-    public boolean update() {
-        return false;
+    public void update() {
         // TODO Auto-generated method stub
-        
+
     }
 }

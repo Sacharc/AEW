@@ -18,7 +18,7 @@ public class KomputerEwolucyjny extends Komputer {
     }
 
     @Override
-    public boolean update() {
+    public void update() {
 
         // TODO Auto-generated method stub
 
@@ -29,6 +29,5 @@ public class KomputerEwolucyjny extends Komputer {
         int nrRuchu = model.liczbaRuchow();
         Double ruch = populacja.najlepszyRuch() * nrRuchu;
         model.wykonajRuchNr(ruch.intValue());
-        return false;
     }
 }

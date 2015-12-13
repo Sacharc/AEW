@@ -65,9 +65,7 @@ class Osobnik implements Comparable<Osobnik>{
                     break;
                 //TODO
             }
-
         }
-
     }
 
 
@@ -95,4 +93,5 @@ class Osobnik implements Comparable<Osobnik>{
     public Double najlepszyRuch() {
         return ruchy.get(0);
     }
+
 }

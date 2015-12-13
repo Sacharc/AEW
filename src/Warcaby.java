@@ -29,16 +29,14 @@ public class Warcaby {
                 switch(aktualnyGracz) {
                 case gracz1:
                     model.sprawdzDostepneRuchy(aktualnyGracz);
-                    while(komputer1.update())
-                        widok.uaktualnij(model.getPlansza());
+                    komputer1.update();
                     widok.uaktualnij(model.getPlansza());
                     aktualnyGracz = Wlasciciel.gracz2;
                     break;
                 case gracz2:
                     model.zmianaWspolrzednych();
                     model.sprawdzDostepneRuchy(aktualnyGracz);
-                    while(komputer2.update());
-                    //widok.uaktualnij(model.getPlansza()); //do mocnego przemyslenia bo trzeba by bylo zmieniac strony dwukrotni tzn przed i po
+                    komputer2.update();
                     model.zmianaWspolrzednych();
                     widok.uaktualnij(model.getPlansza());
                     aktualnyGracz = Wlasciciel.gracz1;

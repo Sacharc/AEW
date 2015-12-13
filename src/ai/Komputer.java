@@ -8,8 +8,8 @@ public abstract class Komputer {
      * Wykonuje ruch lub krok bicia. Informuje czy zosta³ do wykonania jakiœ krok bicia
      * @return True jezeli zosta³ do wykonania jakiœ krok bicia
      */
-    public abstract boolean update();
-    
+    public abstract void update();
+
     public Komputer(Model model) {
         this.model = model;
     }

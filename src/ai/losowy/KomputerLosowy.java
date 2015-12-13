@@ -13,7 +13,11 @@ public class KomputerLosowy extends Komputer{
     }
 
     @Override
-    public boolean update() {
+    public void update() {
+        while(ruch());
+    }
+
+    public boolean ruch() {
         Random rand = new Random();
         if (model.getPlansza().getLiczbaRuchow() != 0) {
             int r = rand.nextInt(model.getPlansza().getLiczbaRuchow());
