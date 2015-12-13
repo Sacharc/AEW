@@ -2,6 +2,7 @@ package ai.algorytmEwolucyjny;
 
 import ai.Komputer;
 import model.Model;
+import model.Wlasciciel;
 
 public class KomputerEwolucyjny extends Komputer {
 
@@ -10,24 +11,33 @@ public class KomputerEwolucyjny extends Komputer {
 
     private Populacja populacja;
 
-    public KomputerEwolucyjny(Model model) {
-        super(model);
-        populacja = new Populacja(model);
-
-        // TODO Auto-generated constructor stub
+    public KomputerEwolucyjny(Model model, Wlasciciel wlasciciel) {
+        super(model, wlasciciel);
+        populacja = new Populacja(model, wlasciciel);
     }
 
     @Override
     public void update() {
 
-        // TODO Auto-generated method stub
+        populacja.generujLosowe();
+        populacja.usunPierwszy();
+        // Dorzucam polowe losowych dla roznorodnosci
 
+        while(ruch())
+            populacja.usunPierwszy();
+    }
+
+    /**
+     *
+     */
+    private boolean ruch() {
         for(int i = 0; i < dlugoscSymulacji; i++) {
             populacja.ocen();
             populacja.rozmnazaj();
         }
         int nrRuchu = model.liczbaRuchow();
         Double ruch = populacja.najlepszyRuch() * nrRuchu;
-        model.wykonajRuchNr(ruch.intValue());
+        return model.wykonajRuchNr(ruch.intValue());
     }
+
 }

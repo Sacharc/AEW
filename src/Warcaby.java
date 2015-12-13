@@ -21,8 +21,9 @@ public class Warcaby {
         for(int i = 0 ; i < 10 ; i++){
             Model model = new Model();
             Widok widok = new Widok();
-            Komputer komputer1 = new KomputerLosowy(model);
-            Komputer komputer2 = new KomputerLosowy(model);
+            Komputer komputer1 = new KomputerLosowy(model, Wlasciciel.gracz1);
+            Komputer komputer2 = new KomputerLosowy(model, Wlasciciel.gracz2);
+            //Komputer komputer2 = new KomputerEwolucyjny(model, Wlasciciel.gracz2);
             Wlasciciel aktualnyGracz = Wlasciciel.gracz1;
             widok.uaktualnij(model.getPlansza());
             while(model.getPlansza().sprawdzCzyKoniecGry()){

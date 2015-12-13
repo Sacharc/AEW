@@ -4,27 +4,32 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 import model.Model;
+import model.Wlasciciel;
 
 /** ZOACZYC CZY SORTUJA SIE W DOBREJ KOLEJNOSCI*/
 
 public class Populacja {
     /** Liczba osobnikow w populacji */
-    static int liczbaOsobnikow = 200;
+    static int liczbaOsobnikow = 20;
 
     Model model;
 
+    Wlasciciel wlasciciel;
+
     private ArrayList<Osobnik> populacja;
 
-    public Populacja(Model model) {
+    public Populacja(Model model, Wlasciciel wlasciciel) {
         this.model = model;
+        this.wlasciciel = wlasciciel;
         this.populacja = new ArrayList<Osobnik>(liczbaOsobnikow);
         for(int i = 0; i < liczbaOsobnikow; i++)
-            populacja.add(new Osobnik(model));
+            populacja.add(new Osobnik(model, wlasciciel));
     }
 
     public void ocen() {
         for(Osobnik osobnik : populacja) {
             osobnik.ocenOsobnika();
+            //System.out.println(osobnik.getOcena());
         }
         populacja.sort(new Comparator<Osobnik>() {
             @Override
@@ -59,7 +64,7 @@ public class Populacja {
     public void generujLosowe() {
         usunGorszaPolowe();
         for(int i = 0; i < liczbaOsobnikow/2; i++)
-            populacja.add(new Osobnik(model));
+            populacja.add(new Osobnik(model, wlasciciel));
     }
 
 

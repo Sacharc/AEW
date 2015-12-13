@@ -356,4 +356,30 @@ public class Plansza{
             wykonajRuch(getListaRuchu().get(nr));
         return false;
     }
+
+    public Statystyki getStatystyki() {
+        int liczbaPionkowGracz1 = 0;
+        int liczbaDamekGracz1 = 0;
+        int liczbaPionkowGracz2 = 0;
+        int liczbaDamekGracz2 = 0;
+
+        for(Pole[] linia : this.pola) {
+            for(Pole p : linia) {
+                Pionek pionek = p.getPionek();
+                if(pionek != null) {
+                    if(pionek.getWlasciciel() == Wlasciciel.gracz1) {
+                        liczbaPionkowGracz1++;
+                        if(pionek.getCzyDamka())
+                            liczbaDamekGracz1++;
+                    }
+                    else {
+                        liczbaPionkowGracz2++;
+                        if(pionek.getCzyDamka())
+                            liczbaDamekGracz1++;
+                    }
+                }
+            }
+        }
+        return new Statystyki(liczbaPionkowGracz1, liczbaDamekGracz1, liczbaPionkowGracz2, liczbaDamekGracz2);
+    }
 }

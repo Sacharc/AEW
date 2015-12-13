@@ -1,16 +1,20 @@
 package ai;
 
 import model.Model;
+import model.Wlasciciel;
 
 public abstract class Komputer {
     protected Model model;
+
+    protected Wlasciciel wlasciciel;
+
     /**
-     * Wykonuje ruch lub krok bicia. Informuje czy zosta³ do wykonania jakiœ krok bicia
-     * @return True jezeli zosta³ do wykonania jakiœ krok bicia
+     * Wykonuje ruch lub bicie
      */
     public abstract void update();
 
-    public Komputer(Model model) {
+    public Komputer(Model model, Wlasciciel wlasciciel) {
         this.model = model;
+        this.wlasciciel = wlasciciel;
     }
 }

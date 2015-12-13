@@ -4,11 +4,12 @@ import java.util.Random;
 
 import ai.Komputer;
 import model.Model;
+import model.Wlasciciel;
 
 public class KomputerLosowy extends Komputer{
 
-    public KomputerLosowy(Model model) {
-        super(model);
+    public KomputerLosowy(Model model, Wlasciciel wlasciciel) {
+        super(model, wlasciciel);
         // TODO Auto-generated constructor stub
     }
 
