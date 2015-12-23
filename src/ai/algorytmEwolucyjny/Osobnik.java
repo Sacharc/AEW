@@ -11,11 +11,11 @@ import model.Wlasciciel;
 class Osobnik implements Comparable<Osobnik>{
     ArrayList<Double> ruchy;
     /** Liczba przewidywanych ruchow */
-    static int liczbaGenow = 100;
+    static int liczbaGenow = 10;
     /** Ile procent podlega mutacji */
-    static int prawdopodobienstwoMutacji = 2;
+    static int prawdopodobienstwoMutacji = 3;
     /** O ile procent zmienia siê cecha*/
-    static double wspolczynnikMutacji = 1.05;
+    static double wspolczynnikMutacji = 1.005;
 
     Model model;
 
@@ -35,26 +35,28 @@ class Osobnik implements Comparable<Osobnik>{
         this.wlasciciel = m.wlasciciel;
         this.ruchy = new ArrayList<Double>(liczbaGenow);
         Random rand = new Random();
-        for(int i = 0; i < ruchy.size(); i++) {
+        for(int i = 0; i < liczbaGenow; i++) {
             Double av = (m.ruchy.get(i) + t.ruchy.get(i))/2;
-            this.ruchy.add(av);
+            Double inc = av * wspolczynnikMutacji;
+            Double value = av;
+
             if(rand.nextInt(100) < prawdopodobienstwoMutacji) {
                 if(rand.nextBoolean()) {
-                    Double inc = this.ruchy.get(i) * wspolczynnikMutacji;
-                    if(inc > 1)
-                        this.ruchy.set(i, inc);
+                    if(inc < 1)
+                        value = inc;
                     else
-                        this.ruchy.set(i, (double) 1);
+                        value = 0.9999; //opcje z MINFLOAT snie dzialaja
                 }
                 else
-                    this.ruchy.set(i, 2 - wspolczynnikMutacji);
+                    value = (2 - wspolczynnikMutacji) * av;
             }
+            this.ruchy.add(value);
         }
     }
-
+    //TODO
     private void generujLosowo() {
         Random rand = new Random();
-        for(int i = 0; i < ruchy.size(); i++)
+        for(int i = 0; i < liczbaGenow; i++)
             ruchy.add(new Double(rand.nextDouble()));
     }
 
@@ -66,38 +68,99 @@ class Osobnik implements Comparable<Osobnik>{
         Plansza plansza = new Plansza(model.getPlansza());
         Wlasciciel aktualnyGracz = wlasciciel;
         int tura = 0;
-        for(Double gen : ruchy) {
+        ocena = 0;
+        for(int i = 0; i < liczbaGenow; i++) {
             if(plansza.sprawdzCzyKoniecGry()) {
-                tura++;
-                if (plansza.getLiczbaRuchow() == 0)
-                    break;
-
-                switch(aktualnyGracz) {
-                case gracz1:
+                if(aktualnyGracz == Wlasciciel.gracz1) {
                     plansza.sprawdzDostepneRuchy(aktualnyGracz);
-
-                    if(!plansza.wykonajRuchNr((int)(gen * plansza.getLiczbaRuchow())))
-                        aktualnyGracz = Wlasciciel.gracz2;
-                    break;
-                case gracz2:
-                    plansza.zmianaWspolrzednych();
-                    plansza.sprawdzDostepneRuchy(aktualnyGracz);
-                    if(!plansza.wykonajRuchNr((int)(gen * plansza.getLiczbaRuchow())))
-                        aktualnyGracz = Wlasciciel.gracz1;
-                    plansza.zmianaWspolrzednych();
-                    break;
+                    if (plansza.getLiczbaRuchow() == 0)
+                        break;
+                    while(i < liczbaGenow && plansza.wykonajRuchNr(ruchy.get(i))) {
+                        i++;
+                    }
+                    aktualnyGracz = Wlasciciel.gracz2;
                 }
+                else {
+                    plansza.zmianaWspolrzednych();
+                    plansza.sprawdzDostepneRuchy(aktualnyGracz);
+                    if (plansza.getLiczbaRuchow() == 0) {
+                        plansza.zmianaWspolrzednych();
+                        break;
+                    }
+                    while(i < liczbaGenow && plansza.wykonajRuchNr(ruchy.get(i))) {
+                        i++;
+                    }
+                    plansza.zmianaWspolrzednych();
+                    aktualnyGracz = Wlasciciel.gracz1;
+                }
+
+
+                Statystyki statystyki = plansza.getStatystyki();
+                int ocenaGracza = statystyki.getOcenaGracza(wlasciciel);
+                int ocenaPrzeciwnika = statystyki.getOcenaPrzeciwnika(wlasciciel);
+                /*                System.out.println("ocenaGracza " + ocenaGracza);
+                System.out.println("ocenaPrzeciwnika " + ocenaPrzeciwnika);*/
+                ocena += (ocenaGracza - ocenaPrzeciwnika)*(liczbaGenow - tura);
+
                 plansza.czyscListyRuchowBic();
             }
+
+            /*
+            Statystyki statystyki = plansza.getStatystyki();
+            int ocenaGracza = statystyki.getOcenaGracza(wlasciciel);
+            int ocenaPrzeciwnika = statystyki.getOcenaPrzeciwnika(wlasciciel);
+
+            System.out.println("ocenaGracza " + ocenaGracza);
+            System.out.println("ocenaPrzeciwnika " + ocenaPrzeciwnika);
+
+            ocena += (ocenaGracza - ocenaPrzeciwnika)*(liczbaGenow - tura);
+             */
+
+            /*
+            for(Double gen : ruchy) {
+                if(plansza.sprawdzCzyKoniecGry()) {
+                    tura++;
+
+                    if(aktualnyGracz == Wlasciciel.gracz1) {
+                        plansza.sprawdzDostepneRuchy(aktualnyGracz);
+                        if (plansza.getLiczbaRuchow() == 0)
+                            break;
+
+
+                        if(!plansza.wykonajRuchNr(gen))
+                            aktualnyGracz = Wlasciciel.gracz2;
+                    }
+                    else {
+                        plansza.zmianaWspolrzednych();
+                        plansza.sprawdzDostepneRuchy(aktualnyGracz);
+                        if (plansza.getLiczbaRuchow() == 0) {
+                            plansza.zmianaWspolrzednych();
+                            break;
+                        }
+                        if(!plansza.wykonajRuchNr(gen))
+                            aktualnyGracz = Wlasciciel.gracz1;
+                        plansza.zmianaWspolrzednych();
+
+                    }
+
+                    plansza.czyscListyRuchowBic();
+                }
+            }*/
+
+            /*            if(plansza.sprawdzCzyKoniecGry()) {
+                if(plansza.ktoWygral() == wlasciciel)
+                    ocena = 200 - tura;
+                else
+                    ocena = -200 + tura;
+                return;
+            }
+
+            Statystyki statystyki = plansza.getStatystyki();
+            int ocenaGracza = statystyki.getOcenaGracza(wlasciciel);
+            int ocenaPrzeciwnika = statystyki.getOcenaPrzeciwnika(wlasciciel);
+            ocena = 2 * ocenaGracza - ocenaPrzeciwnika;*/
+
         }
-        if(plansza.sprawdzCzyKoniecGry()) {
-            ocena = 200 - tura;
-            return;
-        }
-        Statystyki statystyki = plansza.getStatystyki();
-        int ocenaGracza = statystyki.getOcenaGracza(wlasciciel);
-        int ocenaPrzeciwnika = statystyki.getOcenaPrzeciwnika(wlasciciel);
-        ocena = 2 * ocenaGracza - ocenaPrzeciwnika;
     }
 
 

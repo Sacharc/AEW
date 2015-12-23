@@ -10,7 +10,7 @@ import model.Wlasciciel;
 
 public class Populacja {
     /** Liczba osobnikow w populacji */
-    static int liczbaOsobnikow = 20;
+    static int liczbaOsobnikow = 32;
 
     Model model;
 
@@ -29,7 +29,6 @@ public class Populacja {
     public void ocen() {
         for(Osobnik osobnik : populacja) {
             osobnik.ocenOsobnika();
-            //System.out.println(osobnik.getOcena());
         }
         populacja.sort(new Comparator<Osobnik>() {
             @Override
@@ -44,7 +43,7 @@ public class Populacja {
      */
     public void rozmnazaj() {
         usunGorszaPolowe();
-        for(int i = 0; i < liczbaOsobnikow/4; i+=2) {
+        for(int i = 0; i < liczbaOsobnikow/2; i+=2) {
             populacja.add(new Osobnik(populacja.get(i), populacja.get(i + 1)));
             populacja.add(new Osobnik(populacja.get(i), populacja.get(liczbaOsobnikow/2 - i)));
         }
@@ -54,8 +53,9 @@ public class Populacja {
      *  Usuwa gorsza polowe populacji
      */
     private void usunGorszaPolowe() {
-        while(populacja.size() > liczbaOsobnikow/2)
+        while(populacja.size() > liczbaOsobnikow/2) {
             populacja.remove(populacja.size()-1);
+        }
     }
 
     /**
@@ -77,6 +77,9 @@ public class Populacja {
     }
 
     public Double najlepszyRuch() {
+        for (Osobnik osobnik : populacja)
+            System.out.println(osobnik.getOcena());
+        System.out.println("Wybrano::" + populacja.get(0).getOcena());
         return populacja.get(0).najlepszyRuch();
     }
 

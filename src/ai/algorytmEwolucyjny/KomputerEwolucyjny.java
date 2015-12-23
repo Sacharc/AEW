@@ -7,7 +7,7 @@ import model.Wlasciciel;
 public class KomputerEwolucyjny extends Komputer {
 
     /** Liczba symulowanych tur */
-    static int dlugoscSymulacji = 500;
+    static int dlugoscSymulacji = 10;
 
     private Populacja populacja;
 
@@ -19,8 +19,10 @@ public class KomputerEwolucyjny extends Komputer {
     @Override
     public void update() {
 
-        populacja.generujLosowe();
         populacja.usunPierwszy();
+        populacja.usunPierwszy();
+        populacja.generujLosowe();
+
         // Dorzucam polowe losowych dla roznorodnosci
 
         while(ruch())
@@ -32,8 +34,8 @@ public class KomputerEwolucyjny extends Komputer {
      */
     private boolean ruch() {
         for(int i = 0; i < dlugoscSymulacji; i++) {
-            populacja.ocen();
             populacja.rozmnazaj();
+            populacja.ocen();
         }
         int nrRuchu = model.liczbaRuchow();
         Double ruch = populacja.najlepszyRuch() * nrRuchu;

@@ -49,7 +49,7 @@ public class Statystyki {
     }
 
     public int getLiczbaDamekPrzeciwnika(Wlasciciel wlasciciel) {
-        if(wlasciciel == Wlasciciel.gracz2)
+        if(wlasciciel == Wlasciciel.gracz1)
             return liczbaDamekGracz2;
         return liczbaDamekGracz1;
     }

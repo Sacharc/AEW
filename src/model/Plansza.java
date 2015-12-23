@@ -281,7 +281,9 @@ public class Plansza{
     }
 
     public int getLiczbaRuchow() {
-        return getMozliweRuchy().size();
+        if(!listaBic.isEmpty())
+            return listaBic.size();
+        return listaRuchow.size();
     }
 
     /**
@@ -355,6 +357,11 @@ public class Plansza{
         if(!getListaRuchu().isEmpty())
             wykonajRuch(getListaRuchu().get(nr));
         return false;
+    }
+
+    public boolean wykonajRuchNr(double nr) {
+        int numer = (int)(nr * getLiczbaRuchow());
+        return wykonajRuchNr(numer);
     }
 
     public Statystyki getStatystyki() {
