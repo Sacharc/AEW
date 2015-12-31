@@ -11,6 +11,7 @@ public class Ruch
 	private int y1;
 	private int x2;
 	private int y2;
+	private boolean bicie;
 	
 	
 	/**
@@ -18,15 +19,17 @@ public class Ruch
 	 * @param y1
 	 * @param x2
 	 * @param y2
+	 * @param bicie
 	 *
 	 * @author Mateusz Skolimowski
 	 */
-	public Ruch(int x1, int y1, int x2, int y2)
+	public Ruch(int x1, int y1, int x2, int y2, boolean bicie)
 	{
 		this.x1 = x1;
 		this.y1 = y1;
 		this.x2 = x2;
 		this.y2 = y2;
+		this.bicie = bicie;
 	}
 	
 	public int getX1()
@@ -49,24 +52,32 @@ public class Ruch
 		return y2;
 	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Ruch other = (Ruch) obj;
-        if (x1 != other.x1)
-            return false;
-        if (x2 != other.x2)
-            return false;
-        if (y1 != other.y1)
-            return false;
-        if (y2 != other.y2)
-            return false;
-        return true;
-    }
-	
+	public boolean isBicie() {
+		return bicie;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Ruch ruch = (Ruch) o;
+
+		if (x1 != ruch.x1) return false;
+		if (y1 != ruch.y1) return false;
+		if (x2 != ruch.x2) return false;
+		if (y2 != ruch.y2) return false;
+		return bicie == ruch.bicie;
+
+	}
+
+	@Override
+	public int hashCode() {
+		int result = x1;
+		result = 31 * result + y1;
+		result = 31 * result + x2;
+		result = 31 * result + y2;
+		result = 31 * result + (bicie ? 1 : 0);
+		return result;
+	}
 }

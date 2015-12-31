@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Plansza{
@@ -100,7 +101,7 @@ public class Plansza{
         if(p.getY() != 0){
             //pojedynczy ruch w dol lewo
             if(p.getX() != 7 && this.pola[p.getX()+1][p.getY()-1].getPionek() == null){
-                listaRuchow.add(new Ruch(p.getX(),p.getY(),p.getX()+1,p.getY()-1));
+                listaRuchow.add(new Ruch(p.getX(),p.getY(),p.getX()+1,p.getY()-1, false));
             }
             //sprawdzamy czy jest damka
             if(p.getPionek().getCzyDamka()){
@@ -108,7 +109,7 @@ public class Plansza{
                 int x=p.getX()+2;
                 int y=p.getY()-2;
                 while(x <= 7 && y >= 0 && this.pola[x][y].getPionek() == null){
-                    listaRuchow.add(new Ruch(p.getX(),p.getY(),x,y));
+                    listaRuchow.add(new Ruch(p.getX(),p.getY(),x,y, false));
                     x++;
                     y--;
                 }
@@ -117,7 +118,7 @@ public class Plansza{
                     x=p.getX()-1;
                     y=p.getY()-1;
                     while(x >= 0 && y >= 0 && this.pola[x][y].getPionek() == null){
-                        listaRuchow.add(new Ruch(p.getX(),p.getY(),x,y));
+                        listaRuchow.add(new Ruch(p.getX(),p.getY(),x,y, false));
                         x--;
                         y--;
                     }
@@ -125,7 +126,7 @@ public class Plansza{
             }
             if(p.getX() < 6 && p.getY() > 1){
                 if(this.pola[p.getX()+1][p.getY()-1].getPionek() != null && p.getPionek().getWlasciciel() != pola[p.getX()+1][p.getY()-1].getPionek().getWlasciciel() && this.pola[p.getX()+2][p.getY()-2].getPionek() == null){
-                    listaBic.add(new Ruch(p.getX(),p.getY(),p.getX()+2,p.getY()-2));
+                    listaBic.add(new Ruch(p.getX(),p.getY(),p.getX()+2,p.getY()-2, true));
 
                 }
                 else if(p.getPionek().getCzyDamka()){
@@ -133,7 +134,7 @@ public class Plansza{
                     int y = p.getY()-2;
                     while(x <= 6 && y >= 1){
                         if(this.pola[x][y].getPionek() != null && p.getPionek().getWlasciciel() != pola[x][y].getPionek().getWlasciciel() && this.pola[x+1][y-1].getPionek() == null){
-                            listaBic.add(new Ruch(p.getX(),p.getY(),x+1,y-1));
+                            listaBic.add(new Ruch(p.getX(),p.getY(),x+1,y-1, true));
                             break;
                         }
                         x++;
@@ -143,14 +144,14 @@ public class Plansza{
             }
             if(p.getX() > 1 && p.getY() > 1){
                 if(this.pola[p.getX()-1][p.getY()-1].getPionek() != null && p.getPionek().getWlasciciel() != pola[p.getX()-1][p.getY()-1].getPionek().getWlasciciel() && this.pola[p.getX()-2][p.getY()-2].getPionek() == null){
-                    listaBic.add(new Ruch(p.getX(),p.getY(),p.getX()-2,p.getY()-2));
+                    listaBic.add(new Ruch(p.getX(),p.getY(),p.getX()-2,p.getY()-2, true));
                 }
                 else if(p.getPionek().getCzyDamka()){
                     int x = p.getX()-2;
                     int y = p.getY()-2;
                     while(x >= 1 && y >= 1){
                         if(this.pola[x][y].getPionek() != null && p.getPionek().getWlasciciel() != pola[x][y].getPionek().getWlasciciel() && this.pola[x-1][y-1].getPionek() == null){
-                            listaBic.add(new Ruch(p.getX(),p.getY(),x-1,y-1));
+                            listaBic.add(new Ruch(p.getX(),p.getY(),x-1,y-1, true));
                             break;
                         }
                         x--;
@@ -163,13 +164,13 @@ public class Plansza{
         if(p.getY() != 7){
             //pojedyncz ruch w prawo dol
             if(p.getX() != 7 && this.pola[p.getX()+1][p.getY()+1].getPionek() == null)
-                listaRuchow.add(new Ruch(p.getX(),p.getY(),p.getX()+1,p.getY()+1));
+                listaRuchow.add(new Ruch(p.getX(),p.getY(),p.getX()+1,p.getY()+1, false));
             if(p.getPionek().getCzyDamka()){
                 //wielokrotny ruch w prawo dol
                 int x=p.getX()+2;
                 int y=p.getY()+2;
                 while(x <= 7 && y <= 7 && this.pola[x][y].getPionek() == null){
-                    listaRuchow.add(new Ruch(p.getX(),p.getY(),x,y));
+                    listaRuchow.add(new Ruch(p.getX(),p.getY(),x,y, false));
                     x++;
                     y++;
                 }
@@ -178,7 +179,7 @@ public class Plansza{
                     x=p.getX()-1;
                     y=p.getY()+1;
                     while(x >= 0 && y <= 7 && this.pola[x][y].getPionek() == null){
-                        listaRuchow.add(new Ruch(p.getX(),p.getY(),x,y));
+                        listaRuchow.add(new Ruch(p.getX(),p.getY(),x,y, false));
                         x--;
                         y++;
                     }
@@ -186,14 +187,14 @@ public class Plansza{
             }
             if(p.getX() < 6 && p.getY() < 6){
                 if(this.pola[p.getX()+1][p.getY()+1].getPionek() != null && p.getPionek().getWlasciciel() != pola[p.getX()+1][p.getY()+1].getPionek().getWlasciciel() && this.pola[p.getX()+2][p.getY()+2].getPionek() == null){
-                    listaBic.add(new Ruch(p.getX(),p.getY(),p.getX()+2,p.getY()+2));
+                    listaBic.add(new Ruch(p.getX(),p.getY(),p.getX()+2,p.getY()+2, true));
                 }
                 else if(p.getPionek().getCzyDamka()){
                     int x = p.getX()+2;
                     int y = p.getY()+2;
                     while(x <= 6 && y <= 6){
                         if(this.pola[x][y].getPionek() != null && p.getPionek().getWlasciciel() != pola[x][y].getPionek().getWlasciciel() && this.pola[x+1][y+1].getPionek() == null){
-                            listaBic.add(new Ruch(p.getX(),p.getY(),x+1,y+1));
+                            listaBic.add(new Ruch(p.getX(),p.getY(),x+1,y+1, true));
                             break;
                         }
                         x++;
@@ -203,14 +204,14 @@ public class Plansza{
             }
             if(p.getX() > 1 && p.getY() < 6){
                 if(this.pola[p.getX()-1][p.getY()+1].getPionek() != null && p.getPionek().getWlasciciel() != pola[p.getX()-1][p.getY()+1].getPionek().getWlasciciel() && this.pola[p.getX()-2][p.getY()+2].getPionek() == null){
-                    listaBic.add(new Ruch(p.getX(),p.getY(),p.getX()-2,p.getY()+2));
+                    listaBic.add(new Ruch(p.getX(),p.getY(),p.getX()-2,p.getY()+2, true));
                 }
                 else if(p.getPionek().getCzyDamka()){
                     int x = p.getX()-2;
                     int y = p.getY()+2;
                     while(x >= 1 && y <= 6){
                         if(this.pola[x][y].getPionek() != null && p.getPionek().getWlasciciel() != pola[x][y].getPionek().getWlasciciel() && this.pola[x-1][y+1].getPionek() == null){
-                            listaBic.add(new Ruch(p.getX(),p.getY(),x-1,y+1));
+                            listaBic.add(new Ruch(p.getX(),p.getY(),x-1,y+1, true));
                             break;
                         }
                         x--;
@@ -343,19 +344,27 @@ public class Plansza{
         return false;
     }
 
-    public void wykonajRuch(Ruch ruch) {
+    public void wykonajZwyklyRuch(Ruch ruch) {
         int x1 = ruch.getX1();
         int x2 = ruch.getX2();
         int y1 = ruch.getY1();
         int y2 = ruch.getY2();
-        zmienPolozeniePionka(x1, y1, x2,y2);
+        zmienPolozeniePionka(x1, y1, x2, y2);
+    }
+
+    public boolean wykonajRuch(Ruch ruch){
+        if(listaBic.contains(ruch))
+            return this.wykonajBicie(ruch);
+        else if(listaRuchow.contains(ruch))
+            this.wykonajZwyklyRuch(ruch);
+        return false;
     }
 
     public boolean wykonajRuchNr(int nr) {
         if(!getListaBic().isEmpty())
             return wykonajBicie(getListaBic().get(nr));
         if(!getListaRuchu().isEmpty())
-            wykonajRuch(getListaRuchu().get(nr));
+            wykonajZwyklyRuch(getListaRuchu().get(nr));
         return false;
     }
 
@@ -388,5 +397,15 @@ public class Plansza{
             }
         }
         return new Statystyki(liczbaPionkowGracz1, liczbaDamekGracz1, liczbaPionkowGracz2, liczbaDamekGracz2);
+    }
+
+    public boolean equalsByPola(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Plansza plansza = (Plansza) o;
+
+        return Arrays.deepEquals(pola, plansza.pola);
+
     }
 }

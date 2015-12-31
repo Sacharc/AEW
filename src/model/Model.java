@@ -46,4 +46,8 @@ public class Model{
     public boolean wykonajRuchNr(int nr) {
         return plansza.wykonajRuchNr(nr);
     }
+
+    public boolean wykonajRuch(Ruch ruch){
+        return plansza.wykonajRuch(ruch);
+    }
 };
