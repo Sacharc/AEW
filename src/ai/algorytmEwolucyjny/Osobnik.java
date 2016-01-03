@@ -11,11 +11,11 @@ import model.Wlasciciel;
 class Osobnik implements Comparable<Osobnik>{
     ArrayList<Double> ruchy;
     /** Liczba przewidywanych ruchow */
-    static int liczbaGenow = 10;
+    static int liczbaGenow = 55;
     /** Ile procent podlega mutacji */
-    static int prawdopodobienstwoMutacji = 3;
+    static int prawdopodobienstwoMutacji = 5;
     /** O ile procent zmienia siê cecha*/
-    static double wspolczynnikMutacji = 1.005;
+    static double wspolczynnikMutacji = 1.05;
 
     Model model;
 
@@ -64,21 +64,35 @@ class Osobnik implements Comparable<Osobnik>{
         return ocena;
     }
 
+    private void wykonajRuchGracza(Plansza plansza, double gen) {
+
+        double nextGen = gen;
+
+        do {
+            gen = nextGen;
+            int liczbaRuchow = plansza.getLiczbaRuchow();
+            double t = gen * liczbaRuchow;
+            nextGen = t - (int)t;
+        } while (plansza.wykonajRuchNr(gen));
+    }
+
     public void ocenOsobnika() {
         Plansza plansza = new Plansza(model.getPlansza());
         Wlasciciel aktualnyGracz = wlasciciel;
         int tura = 0;
         ocena = 0;
-        for(int i = 0; i < liczbaGenow; i++) {
+
+        for(Double gen : ruchy) {
             if(plansza.sprawdzCzyKoniecGry()) {
                 if(aktualnyGracz == Wlasciciel.gracz1) {
                     plansza.sprawdzDostepneRuchy(aktualnyGracz);
                     if (plansza.getLiczbaRuchow() == 0)
                         break;
-                    while(i < liczbaGenow && plansza.wykonajRuchNr(ruchy.get(i))) {
-                        i++;
-                    }
+
+                    wykonajRuchGracza(plansza, gen);
+
                     aktualnyGracz = Wlasciciel.gracz2;
+
                 }
                 else {
                     plansza.zmianaWspolrzednych();
@@ -87,79 +101,23 @@ class Osobnik implements Comparable<Osobnik>{
                         plansza.zmianaWspolrzednych();
                         break;
                     }
-                    while(i < liczbaGenow && plansza.wykonajRuchNr(ruchy.get(i))) {
-                        i++;
-                    }
+
+                    wykonajRuchGracza(plansza, gen);
+
                     plansza.zmianaWspolrzednych();
                     aktualnyGracz = Wlasciciel.gracz1;
                 }
-
-
-                Statystyki statystyki = plansza.getStatystyki();
+                /*                Statystyki statystyki = plansza.getStatystyki();
                 int ocenaGracza = statystyki.getOcenaGracza(wlasciciel);
                 int ocenaPrzeciwnika = statystyki.getOcenaPrzeciwnika(wlasciciel);
-                /*                System.out.println("ocenaGracza " + ocenaGracza);
-                System.out.println("ocenaPrzeciwnika " + ocenaPrzeciwnika);*/
-                ocena += (ocenaGracza - ocenaPrzeciwnika)*(liczbaGenow - tura);
-
+                ocena += (ocenaGracza - ocenaPrzeciwnika)*(liczbaGenow - tura);*/
                 plansza.czyscListyRuchowBic();
             }
 
-            /*
             Statystyki statystyki = plansza.getStatystyki();
             int ocenaGracza = statystyki.getOcenaGracza(wlasciciel);
             int ocenaPrzeciwnika = statystyki.getOcenaPrzeciwnika(wlasciciel);
-
-            System.out.println("ocenaGracza " + ocenaGracza);
-            System.out.println("ocenaPrzeciwnika " + ocenaPrzeciwnika);
-
-            ocena += (ocenaGracza - ocenaPrzeciwnika)*(liczbaGenow - tura);
-             */
-
-            /*
-            for(Double gen : ruchy) {
-                if(plansza.sprawdzCzyKoniecGry()) {
-                    tura++;
-
-                    if(aktualnyGracz == Wlasciciel.gracz1) {
-                        plansza.sprawdzDostepneRuchy(aktualnyGracz);
-                        if (plansza.getLiczbaRuchow() == 0)
-                            break;
-
-
-                        if(!plansza.wykonajRuchNr(gen))
-                            aktualnyGracz = Wlasciciel.gracz2;
-                    }
-                    else {
-                        plansza.zmianaWspolrzednych();
-                        plansza.sprawdzDostepneRuchy(aktualnyGracz);
-                        if (plansza.getLiczbaRuchow() == 0) {
-                            plansza.zmianaWspolrzednych();
-                            break;
-                        }
-                        if(!plansza.wykonajRuchNr(gen))
-                            aktualnyGracz = Wlasciciel.gracz1;
-                        plansza.zmianaWspolrzednych();
-
-                    }
-
-                    plansza.czyscListyRuchowBic();
-                }
-            }*/
-
-            /*            if(plansza.sprawdzCzyKoniecGry()) {
-                if(plansza.ktoWygral() == wlasciciel)
-                    ocena = 200 - tura;
-                else
-                    ocena = -200 + tura;
-                return;
-            }
-
-            Statystyki statystyki = plansza.getStatystyki();
-            int ocenaGracza = statystyki.getOcenaGracza(wlasciciel);
-            int ocenaPrzeciwnika = statystyki.getOcenaPrzeciwnika(wlasciciel);
-            ocena = 2 * ocenaGracza - ocenaPrzeciwnika;*/
-
+            ocena = 2 * ocenaGracza - ocenaPrzeciwnika;
         }
     }
 
@@ -177,8 +135,12 @@ class Osobnik implements Comparable<Osobnik>{
      *  Usuwa pierwszy ruch
      */
     public void usunPierwszy() {
-        Random rand = new Random();
         ruchy.remove(0);
+        dodajLosowy();
+    }
+
+    private void dodajLosowy() {
+        Random rand = new Random();
         ruchy.add(rand.nextDouble());
     }
 
@@ -186,7 +148,10 @@ class Osobnik implements Comparable<Osobnik>{
      * @return Pierwszy ruch w sciezce
      */
     public Double najlepszyRuch() {
-        return ruchy.get(0);
+        Double t = ruchy.get(0);
+        ruchy.remove(0);
+        dodajLosowy();
+        return t;
     }
 
 }

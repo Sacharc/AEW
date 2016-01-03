@@ -10,7 +10,7 @@ import model.Wlasciciel;
 
 public class Populacja {
     /** Liczba osobnikow w populacji */
-    static int liczbaOsobnikow = 32;
+    static int liczbaOsobnikow = 128;
 
     Model model;
 
@@ -76,10 +76,10 @@ public class Populacja {
             osobnik.usunPierwszy();
     }
 
-    public Double najlepszyRuch() {
+    public Double najlepszyRuch() {/*
         for (Osobnik osobnik : populacja)
             System.out.println(osobnik.getOcena());
-        System.out.println("Wybrano::" + populacja.get(0).getOcena());
+        System.out.println("Wybrano::" + populacja.get(0).getOcena());*/
         return populacja.get(0).najlepszyRuch();
     }
 
