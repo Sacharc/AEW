@@ -1,4 +1,4 @@
-package ai.algorytmEwolucyjny;
+package algorytmEwolucyjny2;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -28,7 +28,9 @@ public class Populacja {
 
     public void ocen() {
         for(Osobnik osobnik : populacja) {
-            osobnik.ocenOsobnika();
+            for(Osobnik osobnik2 : populacja) {
+                osobnik.pojedynkuj(osobnik2);
+            }
         }
         populacja.sort(new Comparator<Osobnik>() {
             @Override
