@@ -11,10 +11,10 @@ import model.Wlasciciel;
 class Osobnik implements Comparable<Osobnik>{
     ArrayList<Double> ruchy;
     /** Liczba przewidywanych ruchow */
-    static int liczbaGenow = 55;
+    static int liczbaGenow = 16;
     /** Ile procent podlega mutacji */
     static int prawdopodobienstwoMutacji = 5;
-    /** O ile procent zmienia siê cecha*/
+    /** O ile procent zmienia si cecha*/
     static double wspolczynnikMutacji = 1.05;
 
     Model model;
@@ -64,7 +64,7 @@ class Osobnik implements Comparable<Osobnik>{
         return ocena;
     }
 
-    private void wykonajRuchGracza(Plansza plansza, double gen) {
+    static void wykonajRuchGracza(Plansza plansza, double gen) {
 
         double nextGen = gen;
 
@@ -84,6 +84,7 @@ class Osobnik implements Comparable<Osobnik>{
 
         for(Double gen : ruchy) {
             if(plansza.sprawdzCzyKoniecGry()) {
+                /*
                 if(aktualnyGracz == Wlasciciel.gracz1) {
                     plansza.sprawdzDostepneRuchy(aktualnyGracz);
                     if (plansza.getLiczbaRuchow() == 0)
@@ -106,11 +107,30 @@ class Osobnik implements Comparable<Osobnik>{
 
                     plansza.zmianaWspolrzednych();
                     aktualnyGracz = Wlasciciel.gracz1;
+                }*/
+
+
+                if(aktualnyGracz != wlasciciel)
+                    plansza.zmianaWspolrzednych();
+                plansza.sprawdzDostepneRuchy(aktualnyGracz);
+                if (plansza.getLiczbaRuchow() == 0) {
+                    if(aktualnyGracz != wlasciciel)
+                        plansza.zmianaWspolrzednych();
+                    break;
                 }
+
+                wykonajRuchGracza(plansza, gen);
+
+                if(aktualnyGracz != wlasciciel)
+                    plansza.zmianaWspolrzednych();
+                aktualnyGracz = aktualnyGracz.przeciwnyGracz();
+
+
                 /*                Statystyki statystyki = plansza.getStatystyki();
                 int ocenaGracza = statystyki.getOcenaGracza(wlasciciel);
                 int ocenaPrzeciwnika = statystyki.getOcenaPrzeciwnika(wlasciciel);
                 ocena += (ocenaGracza - ocenaPrzeciwnika)*(liczbaGenow - tura);*/
+
                 plansza.czyscListyRuchowBic();
             }
 

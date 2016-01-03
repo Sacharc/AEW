@@ -1,13 +1,12 @@
 import ai.Komputer;
 import ai.algorytmEwolucyjny.KomputerEwolucyjny;
 import ai.algorytmMinMax.KomputerMinMax;
-import ai.losowy.KomputerLosowy;
 import model.Model;
 import model.Wlasciciel;
 import widok.Widok;
 
 /**
- B��dy
+BUGS
  Gra powinna sie konczyc jezeli ktorys z graczy nie ma ruchu
  Damki przeskakuja swoje pionki
  Damki przeskakuja kilka pionkow przeciwnika bijac ostatni co pozwala im pobic caly rzad
@@ -19,7 +18,7 @@ public class Warcaby {
 
     private static void spij(){
         try {
-            Thread.sleep(1000);                 //1000 milliseconds is one second.
+            Thread.sleep(500);                 //1000 milliseconds is one second.
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
@@ -32,13 +31,13 @@ public class Warcaby {
         int zwyciestwaGracz1 = 0;
         int zwyciestwaGracz2 = 0;
 
-        for(int i = 0 ; i < 10 ; i++){
+        for(int i = 0 ; i < 20 ; i++){
             Model model = new Model();
             Widok widok = new Widok();
-//            Komputer komputer1 = new KomputerLosowy(model, Wlasciciel.gracz1);
-//            Komputer komputer2 = new KomputerLosowy(model, Wlasciciel.gracz2);
-            Komputer komputer1 = new KomputerEwolucyjny(model, Wlasciciel.gracz2);
-            Komputer komputer2 = new KomputerMinMax(model, Wlasciciel.gracz2);
+            //            Komputer komputer1 = new KomputerLosowy(model, Wlasciciel.gracz1);
+            //Komputer komputer1 = new KomputerLosowy(model, Wlasciciel.gracz1);
+            Komputer komputer2 = new KomputerEwolucyjny(model, Wlasciciel.gracz2);
+            Komputer komputer1 = new KomputerMinMax(model, Wlasciciel.gracz1);
             Wlasciciel aktualnyGracz = Wlasciciel.gracz1;
             widok.uaktualnij(model.getPlansza());
             while(model.getPlansza().sprawdzCzyKoniecGry()){

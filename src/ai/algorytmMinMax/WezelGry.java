@@ -118,13 +118,13 @@ public class WezelGry {
             najlepszyWynik = Double.MAX_EXPONENT;
         for(WezelGry wezelGry : dzieci){
             double wartoscWezla = wezelGry.minmax(wlasciciel);
-            System.out.println(wartoscWezla + " wezel to " + wezelGry);
+            //System.out.println(wartoscWezla + " wezel to " + wezelGry);
             if(najlepszyWezel == null || this.czyNajlepszyWezel(wlasciciel, najlepszyWynik, wartoscWezla)){
                 najlepszyWynik = wartoscWezla;
                 najlepszyWezel = wezelGry;
             }
         }
-        System.out.println();
+        //System.out.println();
         return najlepszyWezel; //zwraca wezel ktory nalezy wybrac
     }
 
