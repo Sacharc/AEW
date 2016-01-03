@@ -1,4 +1,4 @@
-package ai.algorytmEwolucyjny;
+package algorytmEwolucyjny2;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -11,7 +11,7 @@ import model.Wlasciciel;
 class Osobnik implements Comparable<Osobnik>{
     ArrayList<Double> ruchy;
     /** Liczba przewidywanych ruchow */
-    static int liczbaGenow = 55;
+    static int liczbaGenow = 100;
     /** Ile procent podlega mutacji */
     static int prawdopodobienstwoMutacji = 5;
     /** O ile procent zmienia siê cecha*/
@@ -28,12 +28,14 @@ class Osobnik implements Comparable<Osobnik>{
         this.model = model;
         this.wlasciciel = wlasciciel;
         generujLosowo();
+        ocena = 0;
     }
 
     public Osobnik(Osobnik m, Osobnik t) {
         this.model = m.model;
         this.wlasciciel = m.wlasciciel;
         this.ruchy = new ArrayList<Double>(liczbaGenow);
+        ocena = 0;
         Random rand = new Random();
         for(int i = 0; i < liczbaGenow; i++) {
             Double av = (m.ruchy.get(i) + t.ruchy.get(i))/2;
@@ -53,7 +55,7 @@ class Osobnik implements Comparable<Osobnik>{
             this.ruchy.add(value);
         }
     }
-    //TODO
+
     private void generujLosowo() {
         Random rand = new Random();
         for(int i = 0; i < liczbaGenow; i++)
@@ -64,7 +66,59 @@ class Osobnik implements Comparable<Osobnik>{
         return ocena;
     }
 
-    private void wykonajRuchGracza(Plansza plansza, double gen) {
+    private Double getGen(int nr) {
+        return ruchy.get(nr);
+    }
+
+
+    void pojedynkuj(Osobnik przeciwnik) {
+        Plansza plansza = new Plansza(model.getPlansza());
+        Wlasciciel aktualnyGracz = wlasciciel;
+        for(int i = 0; i < 2 * liczbaGenow; i++) {
+            if(plansza.sprawdzCzyKoniecGry()) {
+                if(aktualnyGracz == Wlasciciel.gracz1) {
+                    plansza.sprawdzDostepneRuchy(aktualnyGracz);
+                    if (plansza.getLiczbaRuchow() == 0)
+                        break;
+                    if(aktualnyGracz == wlasciciel)
+                        wykonajRuchGracza(plansza, getGen(i/2));
+                    else
+                        wykonajRuchGracza(plansza, przeciwnik.getGen(i/2));
+
+                    aktualnyGracz = aktualnyGracz.przeciwnyGracz();
+
+                }
+                else {
+                    plansza.zmianaWspolrzednych();
+                    plansza.sprawdzDostepneRuchy(aktualnyGracz);
+                    if (plansza.getLiczbaRuchow() == 0) {
+                        plansza.zmianaWspolrzednych();
+                        break;
+                    }
+
+                    if(aktualnyGracz == wlasciciel)
+                        wykonajRuchGracza(plansza, getGen(i/2));
+                    else
+                        wykonajRuchGracza(plansza, przeciwnik.getGen(i/2));
+
+                    plansza.zmianaWspolrzednych();
+                    aktualnyGracz = aktualnyGracz.przeciwnyGracz();
+                }
+            }
+            else {
+                if(model.getPlansza().ktoWygral() == wlasciciel)
+                    ocena += 1;
+                else
+                    ocena-= 2;
+            }
+        }
+
+    }
+
+
+
+
+    static void wykonajRuchGracza(Plansza plansza, double gen) {
 
         double nextGen = gen;
 
@@ -107,20 +161,14 @@ class Osobnik implements Comparable<Osobnik>{
                     plansza.zmianaWspolrzednych();
                     aktualnyGracz = Wlasciciel.gracz1;
                 }
-                /*                Statystyki statystyki = plansza.getStatystyki();
+                Statystyki statystyki = plansza.getStatystyki();
                 int ocenaGracza = statystyki.getOcenaGracza(wlasciciel);
                 int ocenaPrzeciwnika = statystyki.getOcenaPrzeciwnika(wlasciciel);
-                ocena += (ocenaGracza - ocenaPrzeciwnika)*(liczbaGenow - tura);*/
+                ocena += (ocenaGracza - ocenaPrzeciwnika)*(liczbaGenow - tura);
                 plansza.czyscListyRuchowBic();
             }
-
-            Statystyki statystyki = plansza.getStatystyki();
-            int ocenaGracza = statystyki.getOcenaGracza(wlasciciel);
-            int ocenaPrzeciwnika = statystyki.getOcenaPrzeciwnika(wlasciciel);
-            ocena = 2 * ocenaGracza - ocenaPrzeciwnika;
         }
     }
-
 
     @Override
     public int compareTo(Osobnik osobnikj) {

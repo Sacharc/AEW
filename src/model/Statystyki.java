@@ -60,7 +60,6 @@ public class Statystyki {
 
     public int ocenaRoznica(Wlasciciel wlasciciel){
         int ocena = 3 * getLiczbaDamekGracza(wlasciciel) + getLiczbaPionkowGracza(wlasciciel) - 3 * getLiczbaDamekPrzeciwnika(wlasciciel) - getLiczbaPionkowPrzeciwnika(wlasciciel);
-        System.out.println(ocena);
         return ocena;
     }
 
