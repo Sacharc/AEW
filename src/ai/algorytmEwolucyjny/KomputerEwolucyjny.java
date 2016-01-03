@@ -1,4 +1,4 @@
-package algorytmEwolucyjny2;
+package ai.algorytmEwolucyjny;
 
 import ai.Komputer;
 import model.Model;
@@ -9,9 +9,6 @@ public class KomputerEwolucyjny extends Komputer {
     /** Liczba symulowanych tur */
     static int dlugoscSymulacji = 20;
 
-    /** HACK*/
-    static boolean czyWygenerowano = false;
-
     private Populacja populacja;
 
     public KomputerEwolucyjny(Model model, Wlasciciel wlasciciel) {
@@ -21,8 +18,17 @@ public class KomputerEwolucyjny extends Komputer {
 
     @Override
     public void update() {
-        if(!czyWygenerowano)
-            populacja = new Populacja(model, wlasciciel);
+
+        /*populacja.usunPierwszy();
+        populacja.usunPierwszy();
+        populacja.generujLosowe();*/
+
+        populacja = new Populacja(model, wlasciciel);
+
+        // Dorzucam polowe losowych dla roznorodnosci
+
+        /*while(ruch())
+            populacja.usunPierwszy();*/
         ruch();
     }
 
@@ -30,23 +36,16 @@ public class KomputerEwolucyjny extends Komputer {
      *
      */
     private boolean ruch() {
-        if(!czyWygenerowano) {
-            for(int i = 0; i < dlugoscSymulacji; i++) {
-                populacja.rozmnazaj();
-                populacja.ocen();
-            }
-            czyWygenerowano = true;
+        for(int i = 0; i < dlugoscSymulacji; i++) {
+            populacja.rozmnazaj();
+            populacja.ocen();
         }
-
-        /*Double ruch;
+        Double ruch;
         do{
             int nrRuchu = model.liczbaRuchow();
             ruch = populacja.najlepszyRuch() * nrRuchu;
         } while (model.wykonajRuchNr(ruch.intValue()));
-        return false;*/
-        Osobnik.wykonajRuchGracza(model.getPlansza(), populacja.najlepszyRuch());
         return false;
-
     }
 
 }
