@@ -39,7 +39,7 @@ public class Statystyki {
     public int getLiczbaPionkowPrzeciwnika (Wlasciciel wlasciciel) {
         if(wlasciciel == Wlasciciel.gracz1)
             return liczbaPionkowGracz2;
-        return liczbaDamekGracz1;
+        return liczbaPionkowGracz1;
     }
 
     public int getLiczbaDamekGracza(Wlasciciel wlasciciel) {
@@ -56,6 +56,12 @@ public class Statystyki {
 
     public int getOcenaGracza(Wlasciciel wlasciciel) {
         return 3 * getLiczbaDamekGracza(wlasciciel) + getLiczbaPionkowGracza(wlasciciel);
+    }
+
+    public int ocenaRoznica(Wlasciciel wlasciciel){
+        int ocena = 3 * getLiczbaDamekGracza(wlasciciel) + getLiczbaPionkowGracza(wlasciciel) - 3 * getLiczbaDamekPrzeciwnika(wlasciciel) - getLiczbaPionkowPrzeciwnika(wlasciciel);
+        System.out.println(ocena);
+        return ocena;
     }
 
     public int getOcenaPrzeciwnika(Wlasciciel wlasciciel) {

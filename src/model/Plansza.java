@@ -41,6 +41,15 @@ public class Plansza{
                 this.pola[i][j] = new Pole(p.pola[i][j]);
     }
 
+    public Plansza(Plansza plansza, boolean pobierzListy){
+        this.pola = new Pole[8][8];
+        for(int i = 0; i < 8; i++)
+            for(int j = 0; j < 8; j++)
+                this.pola[i][j] = new Pole(plansza.pola[i][j]);
+        this.listaRuchow = new ArrayList<Ruch>(plansza.listaRuchow);
+        this.listaBic = new ArrayList<Ruch>(plansza.listaBic);;
+    }
+
     private void initPola(){
         this.pola = new Pole[8][8];
         for(int i = 0 ; i < 8 ; i ++ ){
