@@ -255,11 +255,9 @@ public class Plansza{
         }
         for(Pole[] linia : this.pola){
             for(Pole p : linia){
-                if(p.getPionek()!=null){
-                    zmienionaPlansza[7-p.getX()][7-p.getY()].addPionek(p.getPionek().getWlasciciel());
-                    if(p.getPionek().getCzyDamka())
-                        zmienionaPlansza[7-p.getX()][7-p.getY()].getPionek().setCzyDamka(true);
-                }
+                zmienionaPlansza[7-p.getX()][7-p.getY()] = p;
+                p.setX(7-p.getX());
+                p.setY(7-p.getY());
             }
         }
         this.pola = zmienionaPlansza;
