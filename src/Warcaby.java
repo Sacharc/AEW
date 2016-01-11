@@ -2,15 +2,13 @@ import ai.Komputer;
 import ai.algorytmEwolucyjny.KomputerEwolucyjny;
 import ai.algorytmMinMax.KomputerMinMax;
 import model.Model;
+import model.Ruch;
 import model.Wlasciciel;
 import widok.Widok;
 
 /**
 BUGS
- Gra powinna sie konczyc jezeli ktorys z graczy nie ma ruchu
- Damki przeskakuja swoje pionki
- Damki przeskakuja kilka pionkow przeciwnika bijac ostatni co pozwala im pobic caly rzad
- Damki po biciu staja dokladnie za pioniem przeciwnika a moga stanac gdzie chca - DO ROZWAZENIA
+ Damki po biciu staja dokladnie za pioniem przeciwnika a moga stanac gdzie chca - TAK JEST GIT :D
  */
 
 
@@ -51,6 +49,12 @@ public class Warcaby {
                     	czySkonczylySieRuchy = true;
                     	zwyciestwaGracz2++;
                     	break;
+                    }
+                    for(Ruch r : model.getPlansza().getListaBic()){
+                    	System.out.println("bicie x : "+r.getX2()+ " y: "+r.getY2());
+                    }
+                    for(Ruch r : model.getPlansza().getListaRuchu()){
+                    	System.out.println("ruch x : "+r.getX2()+ " y: "+r.getY2());
                     }
                     komputer1.update();
                     widok.uaktualnij(model.getPlansza());

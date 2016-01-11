@@ -142,8 +142,11 @@ public class Plansza{
                     int x = p.getX()+2;
                     int y = p.getY()-2;
                     while(x <= 6 && y >= 1){
-                        if(this.pola[x][y].getPionek() != null && p.getPionek().getWlasciciel() != pola[x][y].getPionek().getWlasciciel() && this.pola[x+1][y-1].getPionek() == null){
-                            listaBic.add(new Ruch(p.getX(),p.getY(),x+1,y-1, true));
+                    	//jest pionek tego samego gracza wiec nie mozna przeskoczyc
+                    	if(this.pola[x][y].getPionek() != null){
+                    		if(this.pola[x][y].getPionek() != null && p.getPionek().getWlasciciel() != pola[x][y].getPionek().getWlasciciel() && this.pola[x+1][y-1].getPionek() == null){
+                    			listaBic.add(new Ruch(p.getX(),p.getY(),x+1,y-1, true));
+                    		}
                             break;
                         }
                         x++;
@@ -159,10 +162,13 @@ public class Plansza{
                     int x = p.getX()-2;
                     int y = p.getY()-2;
                     while(x >= 1 && y >= 1){
-                        if(this.pola[x][y].getPionek() != null && p.getPionek().getWlasciciel() != pola[x][y].getPionek().getWlasciciel() && this.pola[x-1][y-1].getPionek() == null){
-                            listaBic.add(new Ruch(p.getX(),p.getY(),x-1,y-1, true));
-                            break;
-                        }
+                    	//jest pionek tego samego gracza wiec nie mozna przeskoczyc
+                    	if(this.pola[x][y].getPionek() != null){
+                    		if (p.getPionek().getWlasciciel() != pola[x][y].getPionek().getWlasciciel() && this.pola[x-1][y-1].getPionek() == null){
+                    			listaBic.add(new Ruch(p.getX(),p.getY(),x-1,y-1, true));
+                    		}
+                    		break;
+                    	}
                         x--;
                         y--;
                     }
@@ -202,10 +208,13 @@ public class Plansza{
                     int x = p.getX()+2;
                     int y = p.getY()+2;
                     while(x <= 6 && y <= 6){
-                        if(this.pola[x][y].getPionek() != null && p.getPionek().getWlasciciel() != pola[x][y].getPionek().getWlasciciel() && this.pola[x+1][y+1].getPionek() == null){
-                            listaBic.add(new Ruch(p.getX(),p.getY(),x+1,y+1, true));
-                            break;
-                        }
+                    	//jest pionek tego samego gracza wiec nie mozna przeskoczyc
+                    	if(this.pola[x][y].getPionek() != null){
+                    		if(p.getPionek().getWlasciciel() != pola[x][y].getPionek().getWlasciciel() && this.pola[x+1][y+1].getPionek() == null){
+                    			 listaBic.add(new Ruch(p.getX(),p.getY(),x+1,y+1, true));
+                    		}
+                    		break;
+                    	}
                         x++;
                         y++;
                     }
@@ -219,9 +228,12 @@ public class Plansza{
                     int x = p.getX()-2;
                     int y = p.getY()+2;
                     while(x >= 1 && y <= 6){
-                        if(this.pola[x][y].getPionek() != null && p.getPionek().getWlasciciel() != pola[x][y].getPionek().getWlasciciel() && this.pola[x-1][y+1].getPionek() == null){
-                            listaBic.add(new Ruch(p.getX(),p.getY(),x-1,y+1, true));
-                            break;
+                    	//jest pionek tego samego gracza wiec nie mozna przeskoczyc
+                        if(this.pola[x][y].getPionek() != null){
+                        	if(p.getPionek().getWlasciciel() != pola[x][y].getPionek().getWlasciciel() && this.pola[x-1][y+1].getPionek() == null){
+                        		listaBic.add(new Ruch(p.getX(),p.getY(),x-1,y+1, true));
+                        	}
+                        	break;
                         }
                         x--;
                         y++;
