@@ -14,11 +14,7 @@ public class Plansza{
     public Plansza(Wlasciciel gracz1, Wlasciciel gracz2)
     {
         initPola();
-        this.pola[3][0].addPionek(gracz1);
-        this.pola[4][1].addPionek(gracz2);
-        this.pola[5][2].addPionek(gracz2);
-        //this.pola[i][2*j+1].addPionek(gracz1);
-        /*for(int i = 0 ; i < 8 ; i++){
+        for(int i = 0 ; i < 8 ; i++){
             if(i<3){
                 if(i%2==0){
                     wypelnijLinieParzysta(i,gracz1);
@@ -35,7 +31,7 @@ public class Plansza{
                     wypelnijLinieNieParzysta(i,gracz2);
                 }
             }
-        }*/
+        }
     }
 
     public Plansza(Plansza p) {
