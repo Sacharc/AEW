@@ -30,20 +30,28 @@ public class Warcaby {
         //jakiestam zmienne do statystyk
         int zwyciestwaGracz1 = 0;
         int zwyciestwaGracz2 = 0;
+        
+        boolean czySkonczylySieRuchy;
 
         for(int i = 0 ; i < 20 ; i++){
             Model model = new Model();
             Widok widok = new Widok();
+            czySkonczylySieRuchy = false;
             //            Komputer komputer1 = new KomputerLosowy(model, Wlasciciel.gracz1);
             //Komputer komputer1 = new KomputerLosowy(model, Wlasciciel.gracz1);
             Komputer komputer2 = new KomputerEwolucyjny(model, Wlasciciel.gracz2);
             Komputer komputer1 = new KomputerMinMax(model, Wlasciciel.gracz1);
             Wlasciciel aktualnyGracz = Wlasciciel.gracz1;
             widok.uaktualnij(model.getPlansza());
-            while(model.getPlansza().sprawdzCzyKoniecGry()){
+            while(model.getPlansza().sprawdzCzyKoniecGry() && !czySkonczylySieRuchy){
                 switch(aktualnyGracz) {
                 case gracz1:
                     model.sprawdzDostepneRuchy(aktualnyGracz);
+                    if(model.getPlansza().getListaBic().isEmpty() && model.getPlansza().getListaRuchu().isEmpty()){
+                    	czySkonczylySieRuchy = true;
+                    	zwyciestwaGracz2++;
+                    	break;
+                    }
                     komputer1.update();
                     widok.uaktualnij(model.getPlansza());
                     aktualnyGracz = Wlasciciel.gracz2;
@@ -51,6 +59,11 @@ public class Warcaby {
                 case gracz2:
                     model.zmianaWspolrzednych();
                     model.sprawdzDostepneRuchy(aktualnyGracz);
+                    if(model.getPlansza().getListaBic().isEmpty() && model.getPlansza().getListaRuchu().isEmpty()){
+                    	czySkonczylySieRuchy = true;
+                    	zwyciestwaGracz1++;
+                    	break;
+                    }
                     komputer2.update();
                     model.zmianaWspolrzednych();
                     widok.uaktualnij(model.getPlansza());
@@ -58,16 +71,15 @@ public class Warcaby {
                     break;
                 }
                 model.czyscListy();
-
                 spij();
-
-
             }
             //System.out.println(model.getPlansza().ktoWygral());
-            if(model.getPlansza().ktoWygral() == Wlasciciel.gracz1)
-                zwyciestwaGracz1++;
-            else
-                zwyciestwaGracz2++;
+            if(!czySkonczylySieRuchy){
+            	if(model.getPlansza().ktoWygral() == Wlasciciel.gracz1)
+            		zwyciestwaGracz1++;
+            	else
+            		zwyciestwaGracz2++;
+            }
             widok.zamknij();
             System.out.println("Wygrane gracz1 " + zwyciestwaGracz1 + " Wygrane gracz2 " + zwyciestwaGracz2);
         }
