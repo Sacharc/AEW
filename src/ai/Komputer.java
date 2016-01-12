@@ -6,7 +6,7 @@ import model.Wlasciciel;
 public abstract class Komputer {
     protected Model model;
 
-    protected static Wlasciciel wlasciciel;
+    protected Wlasciciel wlasciciel;
 
     /**
      * Wykonuje ruch lub bicie
