@@ -80,4 +80,15 @@ public class Ruch
 		result = 31 * result + (bicie ? 1 : 0);
 		return result;
 	}
+
+	@Override
+	public String toString() {
+		return "Ruch{" +
+				"x1=" + x1 +
+				", y1=" + y1 +
+				", x2=" + x2 +
+				", y2=" + y2 +
+				", bicie=" + bicie +
+				'}';
+	}
 }

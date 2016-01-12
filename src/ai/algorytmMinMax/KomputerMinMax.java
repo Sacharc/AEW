@@ -9,7 +9,7 @@ public class KomputerMinMax extends Komputer {
 
     private WezelGry aktualnyWezelGry;
     private static boolean poInicjalizacjiRozdzielenia = false;
-    private final static int liczbaPoczatkowychPoziomow = 4;
+    private final static int liczbaPoczatkowychPoziomow = 5;
     private final static int liczbaAktualizowanychPoziomow = 2;
 
     public KomputerMinMax(Model model, Wlasciciel wlasciciel) {
@@ -24,13 +24,18 @@ public class KomputerMinMax extends Komputer {
     public void update() {
         this.aktualizujRozdzielanie();
         aktualnyWezelGry = aktualnyWezelGry.wybierzRuch(wlasciciel);
-        while (ruch());
+        while (ruch()){
+            aktualnyWezelGry = aktualnyWezelGry.wybierzRuch(wlasciciel);
+        }
     }
 
     public boolean ruch() {
+        if(aktualnyWezelGry.getRuchDoWykonania() != null){
         Ruch najlepszyRuch = aktualnyWezelGry.getRuchDoWykonania();
-        boolean czyJeszczeBicie = model.wykonajRuch(najlepszyRuch);
-        return czyJeszczeBicie;
+            boolean czyJeszczeBicie = model.wykonajRuch(najlepszyRuch);
+            return czyJeszczeBicie;
+        }
+        return false;
     }
 
 //    private void aktualizujRozdzielanie() {
