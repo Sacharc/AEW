@@ -11,7 +11,7 @@ public class KomputerMinMax extends Komputer {
     private static Wlasciciel wlasciciel2;
     private static boolean poInicjalizacjiRozdzielenia = false;
     private final static int liczbaPoczatkowychPoziomow = 4;
-    private final static int liczbaAktualizowanychPoziomow = 2;
+    private final static int liczbaAktualizowanychPoziomow = 8;
 
     public KomputerMinMax(Model model, Wlasciciel wlasciciel) {
         super(model, wlasciciel);
@@ -62,5 +62,11 @@ public class KomputerMinMax extends Komputer {
             aktualnyWezelGry.rozdziel(wlasciciel);
         }
         this.poInicjalizacjiRozdzielenia = true;
+    }
+
+    @Override
+    public void identyfikuj() {
+        System.out.print("KomputerMinMax ");
+        
     }
 }

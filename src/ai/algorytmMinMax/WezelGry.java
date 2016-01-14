@@ -103,8 +103,6 @@ public class WezelGry {
     //TODO root(max) -> min -> max -> min itd ... koncze na wezlach bez dzieci
     public double minmax (){
         if(dzieci.isEmpty()){
-            if(this.wlasciciel != KomputerMinMax.getWlasciciel())
-                System.out.println("minimax dla " + this.wlasciciel + " " + this.plansza.getStatystyki().ocenaRoznica(KomputerMinMax.getWlasciciel()) );
             return this.plansza.getStatystyki().ocenaRoznica(KomputerMinMax.getWlasciciel());
         }
 

@@ -20,17 +20,6 @@ public class KomputerEwolucyjny extends Komputer {
     public void update() {
         populacja = new Populacja(model, wlasciciel);
         ruch();
-        
-        
-        
-        
-        try {
-            Thread.sleep(5000);                 //1000 milliseconds is one second.
-        } catch(InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
-        System.out.println("EWO");
-        
     }
 
     /**
@@ -44,6 +33,12 @@ public class KomputerEwolucyjny extends Komputer {
         Osobnik.wykonajRuchGracza(model.getPlansza(), populacja.najlepszyRuch());
 
         return false;
+    }
+
+    @Override
+    public void identyfikuj() {
+        System.out.print("Komputer Ewolucyjny ");
+        
     }
 
 }

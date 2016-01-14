@@ -47,5 +47,13 @@ public class KomputerEwolucyjny extends Komputer {
         } while (model.wykonajRuchNr(ruch.intValue()));
         return false;
     }
+    
+    @Override
+    public void identyfikuj() {
+        System.out.print("KomputerEwolucyjny n ");
+        
+    }
+    
+    
 
 }

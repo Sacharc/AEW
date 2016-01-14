@@ -26,5 +26,11 @@ public class KomputerLosowy extends Komputer{
         }
         return false;
     }
+    
+    @Override
+    public void identyfikuj() {
+        System.out.print("KomputerLosowy ");
+        
+    }
 
 }

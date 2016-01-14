@@ -12,6 +12,8 @@ public abstract class Komputer {
      * Wykonuje ruch lub bicie
      */
     public abstract void update();
+    
+    public abstract void identyfikuj();
 
     public Komputer(Model model, Wlasciciel wlasciciel) {
         this.model = model;
