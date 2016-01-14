@@ -3,9 +3,12 @@ import ai.algorytmEwolucyjny.KomputerEwolucyjny;
 import ai.algorytmMinMax.KomputerMinMax;
 import ai.losowy.KomputerLosowy;
 import jdk.internal.dynalink.beans.StaticClass;
+import jdk.internal.dynalink.beans.StaticClass;
 import model.Model;
 import model.Plansza;
+import model.Plansza;
 import model.Ruch;
+import model.Statystyki;
 import model.Statystyki;
 import model.Wlasciciel;
 import widok.Widok;
@@ -25,7 +28,7 @@ public class Warcaby {
             Thread.currentThread().interrupt();
         }
     }
-    
+        
     public static void main(String[] args) {
         //jakiestam zmienne do statystyk
         int zwyciestwaGracz1 = 0;
@@ -42,13 +45,18 @@ public class Warcaby {
             staraOcena2 = 0;
             licznik = 8;
             
+            staraOcena1 = 0;
+            staraOcena2 = 0;
+            licznik = 8;
+            
             Model model = new Model();
             Widok widok = new Widok();
             czySkonczylySieRuchy = false;
-//            Komputer komputer1 = new KomputerLosowy(model, Wlasciciel.gracz1);
-           Komputer komputer2 = new KomputerLosowy(model, Wlasciciel.gracz2);
-            Komputer komputer1 = new KomputerMinMax(model, Wlasciciel.gracz1);
+            Komputer komputer1 = new KomputerLosowy(model, Wlasciciel.gracz1);
+//           Komputer komputer2 = new KomputerLosowy(model, Wlasciciel.gracz2);
+//            Komputer komputer1 = new KomputerMinMax(model, Wlasciciel.gracz1);
            // Komputer komputer2 = new KomputerEwolucyjny(model, Wlasciciel.gracz2);
+             Komputer komputer2 = new KomputerMinMax(model, Wlasciciel.gracz2);
 
             Wlasciciel aktualnyGracz = Wlasciciel.gracz1;
             widok.uaktualnij(model.getPlansza());
@@ -100,6 +108,8 @@ public class Warcaby {
                 spij();
 
                 
+
+                
             }
             //System.out.println(model.getPlansza().ktoWygral());
             if(!czySkonczylySieRuchy){
@@ -107,6 +117,7 @@ public class Warcaby {
             		zwyciestwaGracz1++;
             	else
             		zwyciestwaGracz2++;
+            	
             	
             }
             widok.zamknij();
@@ -116,7 +127,5 @@ public class Warcaby {
             komputer2.identyfikuj();
             System.out.println(zwyciestwaGracz2);
         }
-
     }
-
 }

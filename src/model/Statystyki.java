@@ -59,7 +59,7 @@ public class Statystyki {
     }
 
     public int ocenaRoznica(Wlasciciel wlasciciel){
-        int ocena = 3 * getLiczbaDamekGracza(wlasciciel) + getLiczbaPionkowGracza(wlasciciel) - 3 * getLiczbaDamekPrzeciwnika(wlasciciel) - getLiczbaPionkowPrzeciwnika(wlasciciel);
+        int ocena = 4 * getLiczbaDamekGracza(wlasciciel) + 2 * getLiczbaPionkowGracza(wlasciciel) - 3 * getLiczbaDamekPrzeciwnika(wlasciciel) - getLiczbaPionkowPrzeciwnika(wlasciciel);
         return ocena;
     }
 
