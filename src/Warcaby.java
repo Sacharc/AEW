@@ -17,7 +17,7 @@ public class Warcaby {
 
     private static void spij(){
         try {
-            Thread.sleep(1000);                 //1000 milliseconds is one second.
+            Thread.sleep(800);                 //1000 milliseconds is one second.
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
@@ -36,8 +36,9 @@ public class Warcaby {
             czySkonczylySieRuchy = false;
 //            Komputer komputer1 = new KomputerLosowy(model, Wlasciciel.gracz1);
 //            Komputer komputer2 = new KomputerLosowy(model, Wlasciciel.gracz2);
-            Komputer komputer1 = new KomputerEwolucyjny(model, Wlasciciel.gracz1);
-            Komputer komputer2 = new KomputerMinMax(model, Wlasciciel.gracz2);
+            Komputer komputer1 = new KomputerMinMax(model, Wlasciciel.gracz1);
+            Komputer komputer2 = new KomputerEwolucyjny(model, Wlasciciel.gracz2);
+            
             Wlasciciel aktualnyGracz = Wlasciciel.gracz1;
             widok.uaktualnij(model.getPlansza());
             while(model.getPlansza().sprawdzCzyKoniecGry() && !czySkonczylySieRuchy){
@@ -49,12 +50,7 @@ public class Warcaby {
                     	zwyciestwaGracz2++;
                     	break;
                     }
-                    for(Ruch r : model.getPlansza().getListaBic()){
-//                    	System.out.println("bicie x : "+r.getX2()+ " y: "+r.getY2());
-                    }
-                    for(Ruch r : model.getPlansza().getListaRuchu()){
-//                    	System.out.println("ruch x : "+r.getX2()+ " y: "+r.getY2());
-                    }
+                    spij();
                     komputer1.update();
                     widok.uaktualnij(model.getPlansza());
                     aktualnyGracz = Wlasciciel.gracz2;
@@ -74,7 +70,7 @@ public class Warcaby {
                     break;
                 }
                 model.czyscListy();
-//                spij();
+                spij();
             }
             //System.out.println(model.getPlansza().ktoWygral());
             if(!czySkonczylySieRuchy){

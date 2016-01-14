@@ -7,7 +7,7 @@ import model.Wlasciciel;
 public class KomputerEwolucyjny extends Komputer {
 
     /** Liczba symulowanych tur */
-    static int dlugoscSymulacji = 50;
+    static int dlugoscSymulacji = 2;
 
     private Populacja populacja;
 
@@ -20,6 +20,17 @@ public class KomputerEwolucyjny extends Komputer {
     public void update() {
         populacja = new Populacja(model, wlasciciel);
         ruch();
+        
+        
+        
+        
+        try {
+            Thread.sleep(5000);                 //1000 milliseconds is one second.
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+        System.out.println("EWO");
+        
     }
 
     /**

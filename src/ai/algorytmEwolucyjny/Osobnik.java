@@ -11,11 +11,11 @@ import model.Wlasciciel;
 class Osobnik implements Comparable<Osobnik>{
     ArrayList<Double> ruchy;
     /** Liczba przewidywanych ruchow */
-    static int liczbaGenow = 16;
+    static int liczbaGenow = 12;
     /** Ile procent podlega mutacji */
     static int prawdopodobienstwoMutacji = 5;
     /** O ile procent zmienia si cecha*/
-    static double wspolczynnikMutacji = 1.05;
+    static double wspolczynnikMutacji = 1.1;
 
     Model model;
 
@@ -41,6 +41,7 @@ class Osobnik implements Comparable<Osobnik>{
             Double value = av;
 
             if(rand.nextInt(100) < prawdopodobienstwoMutacji) {
+                /*
                 if(rand.nextBoolean()) {
                     if(inc < 1)
                         value = inc;
@@ -48,7 +49,8 @@ class Osobnik implements Comparable<Osobnik>{
                         value = 0.9999; //opcje z MINFLOAT snie dzialaja
                 }
                 else
-                    value = (2 - wspolczynnikMutacji) * av;
+                    value = (2 - wspolczynnikMutacji) * av;*/
+                value = rand.nextDouble();
             }
             this.ruchy.add(value);
         }
@@ -84,34 +86,9 @@ class Osobnik implements Comparable<Osobnik>{
 
         for(Double gen : ruchy) {
             if(plansza.sprawdzCzyKoniecGry()) {
-                /*
-                if(aktualnyGracz == Wlasciciel.gracz1) {
-                    plansza.sprawdzDostepneRuchy(aktualnyGracz);
-                    if (plansza.getLiczbaRuchow() == 0)
-                        break;
-
-                    wykonajRuchGracza(plansza, gen);
-
-                    aktualnyGracz = Wlasciciel.gracz2;
-
-                }
-                else {
-                    plansza.zmianaWspolrzednych();
-                    plansza.sprawdzDostepneRuchy(aktualnyGracz);
-                    if (plansza.getLiczbaRuchow() == 0) {
-                        plansza.zmianaWspolrzednych();
-                        break;
-                    }
-
-                    wykonajRuchGracza(plansza, gen);
-
-                    plansza.zmianaWspolrzednych();
-                    aktualnyGracz = Wlasciciel.gracz1;
-                }*/
-
-
                 if(aktualnyGracz != wlasciciel)
                     plansza.zmianaWspolrzednych();
+                
                 plansza.sprawdzDostepneRuchy(aktualnyGracz);
                 if (plansza.getLiczbaRuchow() == 0) {
                     if(aktualnyGracz != wlasciciel)
@@ -123,21 +100,25 @@ class Osobnik implements Comparable<Osobnik>{
 
                 if(aktualnyGracz != wlasciciel)
                     plansza.zmianaWspolrzednych();
+/*                else {
+                    Statystyki statystyki = plansza.getStatystyki();
+                    int ocenaGracza = statystyki.getOcenaGracza(wlasciciel);
+                    int ocenaPrzeciwnika = statystyki.getOcenaPrzeciwnika(wlasciciel);
+                    ocena += statystyki.ocenaRoznica(wlasciciel) * (liczbaGenow - tura);
+                }*/
+                
                 aktualnyGracz = aktualnyGracz.przeciwnyGracz();
-
-
-                /*                Statystyki statystyki = plansza.getStatystyki();
-                int ocenaGracza = statystyki.getOcenaGracza(wlasciciel);
-                int ocenaPrzeciwnika = statystyki.getOcenaPrzeciwnika(wlasciciel);
-                ocena += (ocenaGracza - ocenaPrzeciwnika)*(liczbaGenow - tura);*/
-
                 plansza.czyscListyRuchowBic();
+                tura++;
             }
-
+            
             Statystyki statystyki = plansza.getStatystyki();
+            ocena = statystyki.ocenaRoznica(wlasciciel);
+
+/*            Statystyki statystyki = plansza.getStatystyki();
             int ocenaGracza = statystyki.getOcenaGracza(wlasciciel);
             int ocenaPrzeciwnika = statystyki.getOcenaPrzeciwnika(wlasciciel);
-            ocena = 2 * ocenaGracza - ocenaPrzeciwnika;
+            ocena = ocenaGracza - 2 *ocenaPrzeciwnika;*/
         }
     }
 
