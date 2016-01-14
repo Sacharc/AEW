@@ -2,13 +2,7 @@ import ai.Komputer;
 import ai.algorytmEwolucyjny.KomputerEwolucyjny;
 import ai.algorytmMinMax.KomputerMinMax;
 import ai.losowy.KomputerLosowy;
-import jdk.internal.dynalink.beans.StaticClass;
-import jdk.internal.dynalink.beans.StaticClass;
 import model.Model;
-import model.Plansza;
-import model.Plansza;
-import model.Ruch;
-import model.Statystyki;
 import model.Statystyki;
 import model.Wlasciciel;
 import widok.Widok;
@@ -40,7 +34,7 @@ public class Warcaby {
         
         boolean czySkonczylySieRuchy;
 
-        for(int i = 0 ; i < 20 ; i++){
+        for(int i = 0 ; i < 50 ; i++){
             staraOcena1 = 0;
             staraOcena2 = 0;
             licznik = 8;
@@ -52,9 +46,12 @@ public class Warcaby {
             Model model = new Model();
             Widok widok = new Widok();
             czySkonczylySieRuchy = false;
-            Komputer komputer1 = new KomputerLosowy(model, Wlasciciel.gracz1);
+            //Komputer komputer1 = new KomputerLosowy(model, Wlasciciel.gracz1);
 //           Komputer komputer2 = new KomputerLosowy(model, Wlasciciel.gracz2);
 //            Komputer komputer1 = new KomputerMinMax(model, Wlasciciel.gracz1);
+            
+            Komputer komputer1 = new KomputerEwolucyjny(model, Wlasciciel.gracz1);
+            
            // Komputer komputer2 = new KomputerEwolucyjny(model, Wlasciciel.gracz2);
              Komputer komputer2 = new KomputerMinMax(model, Wlasciciel.gracz2);
 
@@ -106,9 +103,6 @@ public class Warcaby {
                 }
                 model.czyscListy();
                 spij();
-
-                
-
                 
             }
             //System.out.println(model.getPlansza().ktoWygral());
@@ -117,8 +111,6 @@ public class Warcaby {
             		zwyciestwaGracz1++;
             	else
             		zwyciestwaGracz2++;
-            	
-            	
             }
             widok.zamknij();
             System.out.print("Wygrane ");

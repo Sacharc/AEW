@@ -7,7 +7,7 @@ import model.Wlasciciel;
 public class KomputerEwolucyjny extends Komputer {
 
     /** Liczba symulowanych tur */
-    static int dlugoscSymulacji = 2;
+    static int dlugoscSymulacji = 20;
 
     private Populacja populacja;
 

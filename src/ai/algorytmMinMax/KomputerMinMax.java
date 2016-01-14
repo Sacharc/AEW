@@ -10,7 +10,7 @@ public class KomputerMinMax extends Komputer {
     private WezelGry aktualnyWezelGry;
     private static Wlasciciel wlasciciel2;
     private static boolean poInicjalizacjiRozdzielenia = false;
-    private final static int liczbaPoczatkowychPoziomow = 4;
+    private final static int liczbaPoczatkowychPoziomow = 2;
     private final static int liczbaAktualizowanychPoziomow = 8;
 
     public KomputerMinMax(Model model, Wlasciciel wlasciciel) {
