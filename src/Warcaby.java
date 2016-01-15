@@ -105,7 +105,6 @@ public class Warcaby {
                 spij();
                 
             }
-            //System.out.println(model.getPlansza().ktoWygral());
             if(!czySkonczylySieRuchy){
             	if(model.getPlansza().ktoWygral() == Wlasciciel.gracz1)
             		zwyciestwaGracz1++;

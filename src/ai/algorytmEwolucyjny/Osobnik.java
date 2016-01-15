@@ -36,20 +36,8 @@ class Osobnik implements Comparable<Osobnik>{
         this.ruchy = new ArrayList<Double>(liczbaGenow);
         Random rand = new Random();
         for(int i = 0; i < liczbaGenow; i++) {
-            Double av = (m.ruchy.get(i) + t.ruchy.get(i))/2;
-            Double inc = av * wspolczynnikMutacji;
-            Double value = av;
-
+            Double value = (m.ruchy.get(i) + t.ruchy.get(i))/2;
             if(rand.nextInt(100) < prawdopodobienstwoMutacji) {
-                /*
-                if(rand.nextBoolean()) {
-                    if(inc < 1)
-                        value = inc;
-                    else
-                        value = 0.9999; //opcje z MINFLOAT snie dzialaja
-                }
-                else
-                    value = (2 - wspolczynnikMutacji) * av;*/
                 value = rand.nextDouble();
             }
             this.ruchy.add(value);
@@ -67,9 +55,7 @@ class Osobnik implements Comparable<Osobnik>{
     }
 
     static void wykonajRuchGracza(Plansza plansza, double gen) {
-
         double nextGen = gen;
-
         do {
             gen = nextGen;
             int liczbaRuchow = plansza.getLiczbaRuchow();
@@ -100,12 +86,9 @@ class Osobnik implements Comparable<Osobnik>{
 
                 if(aktualnyGracz != wlasciciel)
                     plansza.zmianaWspolrzednych();
-/*                else {
-                    Statystyki statystyki = plansza.getStatystyki();
-                    int ocenaGracza = statystyki.getOcenaGracza(wlasciciel);
-                    int ocenaPrzeciwnika = statystyki.getOcenaPrzeciwnika(wlasciciel);
-                    ocena += statystyki.ocenaRoznica(wlasciciel) * (liczbaGenow - tura);
-                }*/
+
+/*                Statystyki statystyki = plansza.getStatystyki();
+                ocena += statystyki.ocenaRoznica(wlasciciel) * (liczbaGenow - tura);*/
                 
                 aktualnyGracz = aktualnyGracz.przeciwnyGracz();
                 plansza.czyscListyRuchowBic();
@@ -114,11 +97,6 @@ class Osobnik implements Comparable<Osobnik>{
             
             Statystyki statystyki = plansza.getStatystyki();
             ocena = statystyki.ocenaRoznica(wlasciciel);
-
-/*            Statystyki statystyki = plansza.getStatystyki();
-            int ocenaGracza = statystyki.getOcenaGracza(wlasciciel);
-            int ocenaPrzeciwnika = statystyki.getOcenaPrzeciwnika(wlasciciel);
-            ocena = ocenaGracza - 2 *ocenaPrzeciwnika;*/
         }
     }
 
