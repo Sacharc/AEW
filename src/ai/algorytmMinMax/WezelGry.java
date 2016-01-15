@@ -128,19 +128,20 @@ public class WezelGry {
         }
         WezelGry najlepszyWezel = null;
         double najlepszyWynik;
-        if(wlasciciel == KomputerMinMax.getWlasciciel())
+        
+        if(wlasciciel == KomputerMinMax.getWlasciciel()) 
             najlepszyWynik = Double.MIN_EXPONENT;
         else
             najlepszyWynik = Double.MAX_EXPONENT;
+        
+        
         for(WezelGry wezelGry : dzieci){
             double wartoscWezla = wezelGry.minmax();
-//            System.out.println(wartoscWezla + " wezel to " + wezelGry);
             if(najlepszyWezel == null || this.czyNajlepszyWezel(wlasciciel, najlepszyWynik, wartoscWezla)){
                 najlepszyWynik = wartoscWezla;
                 najlepszyWezel = wezelGry;
             }
         }
-        //System.out.println();
         return najlepszyWezel; //zwraca wezel ktory nalezy wybrac
     }
 
@@ -164,7 +165,7 @@ public class WezelGry {
                 if(dalejBicia) { //sa jakies dalsze bicia
                     planszaPoRuchu.czyscListyRuchowBic();
                     this.dzieci.add(new WezelGry(planszaPoRuchu, ruch, wlasciciel, true));
-//                    System.out.println("wielo ruchu " + ruch.toString());
+
                 }
                 else{ //nie ma juz nastepnych bic - kolej przeciwnika
                     planszaPoRuchu.czyscListyRuchowBic();
@@ -175,7 +176,6 @@ public class WezelGry {
         }
         for(WezelGry wezelGry : this.dzieci) {
             if (wezelGry.czyJestDoWykonaniaNastepneBicie){
-//                System.out.println("wchodze do rozjebania bicia ");
                 Plansza planszaKopia = new Plansza(wezelGry.plansza, true);
                 planszaKopia.sprawdzDostepneRuchy(wlasciciel);
                 wezelGry.rozdzielBicie(planszaKopia, wlasciciel);
@@ -186,8 +186,6 @@ public class WezelGry {
     private boolean czyNajlepszyWezel(Wlasciciel wlasciciel, double maxWartosc, double wartoscWezla){
         if(wlasciciel == KomputerMinMax.getWlasciciel() && wartoscWezla > maxWartosc)
             return true;
-//        else if(wartoscWezla*(-1) > maxWartosc*(-1))
-//            return true;
         return false;
     }
 }

@@ -7,12 +7,6 @@ import model.Statystyki;
 import model.Wlasciciel;
 import widok.Widok;
 
-/**
- B��dy
- Damki po biciu staja dokladnie za pioniem przeciwnika a moga stanac gdzie chca - TAK JEST GIT :D
- */
-
-
 public class Warcaby {
 
     private static void spij(){

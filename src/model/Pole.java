@@ -1,10 +1,5 @@
 package model;
 
-/**
- *
- *
- * @author Mateusz Skolimowki
- */
 public class Pole{
 
     private Pionek pionek;

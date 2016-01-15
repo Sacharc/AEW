@@ -40,22 +40,6 @@ public class KomputerMinMax extends Komputer {
         return false;
     }
 
-//    private void aktualizujRozdzielanie() {
-//        if (this.poInicjalizacjiRozdzielenia) {
-//            aktualnyWezelGry = this.szukajAktualnegoWezla(aktualnyWezelGry); //szuka posrod dzieci ostatniego aktualnego wezla
-//            for (int i = 0; i < liczbaAktualizowanychPoziomow; ++i) {
-//                aktualnyWezelGry.rozdziel(wlasciciel);
-//            }
-//        }
-//        else {
-//            aktualnyWezelGry = new WezelGry(model.getPlansza(), null, wlasciciel);
-//            for(int i = 0; i < liczbaPoczatkowychPoziomow; ++i){
-//                aktualnyWezelGry.rozdziel(wlasciciel);
-//            }
-//            this.poInicjalizacjiRozdzielenia = true;
-//        }
-//    }
-
     private void aktualizujRozdzielanie() {
         aktualnyWezelGry = new WezelGry(model.getPlansza(), null, wlasciciel);
         for(int i = 0; i < liczbaPoczatkowychPoziomow; ++i){

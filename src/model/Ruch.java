@@ -1,10 +1,5 @@
 package model;
 
-/**
- *
- *
- * @author Mateusz Skolimowki
- */
 public class Ruch
 {
 	private int x1;
@@ -20,8 +15,6 @@ public class Ruch
 	 * @param x2
 	 * @param y2
 	 * @param bicie
-	 *
-	 * @author Mateusz Skolimowski
 	 */
 	public Ruch(int x1, int y1, int x2, int y2, boolean bicie)
 	{
