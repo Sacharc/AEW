@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 import ai.Komputer;
 import ai.algorytmEwolucyjny.KomputerEwolucyjny;
 import ai.algorytmMinMax.KomputerMinMax;
@@ -28,6 +30,9 @@ public class Warcaby {
         
         boolean czySkonczylySieRuchy;
 
+        System.out.println("wybierz opcje (np. '1'): \n1.Ewolucyjny vs Losowy \n2.Losowy vs MinMax \n3.Ewolucyjny vs MinMax");
+        Scanner odczyt = new Scanner(System.in);
+        String komenda = odczyt.nextLine();
         for(int i = 0 ; i < 100 ; i++){
             staraOcena1 = 0;
             staraOcena2 = 0;
@@ -39,16 +44,24 @@ public class Warcaby {
             
             Model model = new Model();
             Widok widok = new Widok();
+            widok.uaktualnij(model.getPlansza());
             czySkonczylySieRuchy = false;
-            //Komputer komputer1 = new KomputerLosowy(model, Wlasciciel.gracz1);
-//           Komputer komputer2 = new KomputerLosowy(model, Wlasciciel.gracz2);
-//            Komputer komputer1 = new KomputerMinMax(model, Wlasciciel.gracz1);
-            
-            Komputer komputer1 = new KomputerEwolucyjny(model, Wlasciciel.gracz1);
-            
-           // Komputer komputer2 = new KomputerEwolucyjny(model, Wlasciciel.gracz2);
-             Komputer komputer2 = new KomputerMinMax(model, Wlasciciel.gracz2);
+            Komputer komputer1 = null;
+            Komputer komputer2 = null;
+            if(komenda.equals("1")){
+            	komputer1 = new KomputerEwolucyjny(model, Wlasciciel.gracz1);
+            	komputer2 = new KomputerLosowy(model, Wlasciciel.gracz2);
+            }
+            else if(komenda.equals("2")){
+            	komputer1 = new KomputerLosowy(model, Wlasciciel.gracz1);
+            	komputer2 = new KomputerMinMax(model, Wlasciciel.gracz2);
+            }
+            else{
+            	komputer1 = new KomputerEwolucyjny(model, Wlasciciel.gracz1);
+            	komputer2 = new KomputerMinMax(model, Wlasciciel.gracz2);
+            }
 
+            
             Wlasciciel aktualnyGracz = Wlasciciel.gracz1;
             widok.uaktualnij(model.getPlansza());
             while(model.getPlansza().sprawdzCzyKoniecGry() && !czySkonczylySieRuchy) {
