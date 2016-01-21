@@ -11,7 +11,7 @@ public class Warcaby {
 
     private static void spij(){
         try {
-            Thread.sleep(10);                 //1000 milliseconds is one second.
+            Thread.sleep(450);                 //1000 milliseconds is one second.
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
@@ -28,7 +28,7 @@ public class Warcaby {
         
         boolean czySkonczylySieRuchy;
 
-        for(int i = 0 ; i < 50 ; i++){
+        for(int i = 0 ; i < 100 ; i++){
             staraOcena1 = 0;
             staraOcena2 = 0;
             licznik = 8;
@@ -96,7 +96,7 @@ public class Warcaby {
                     break;
                 }
                 model.czyscListy();
-                spij();
+                //spij();
                 
             }
             if(!czySkonczylySieRuchy){

@@ -10,7 +10,7 @@ import model.Wlasciciel;
 
 public class Populacja {
     /** Liczba osobnikow w populacji */
-    static int liczbaOsobnikow = 128;
+    static int liczbaOsobnikow = 64;
 
     Model model;
 

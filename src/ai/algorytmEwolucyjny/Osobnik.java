@@ -11,11 +11,10 @@ import model.Wlasciciel;
 class Osobnik implements Comparable<Osobnik>{
     ArrayList<Double> ruchy;
     /** Liczba przewidywanych ruchow */
-    static int liczbaGenow = 12;
+    static int liczbaGenow = 8;
     /** Ile procent podlega mutacji */
     static int prawdopodobienstwoMutacji = 5;
-    /** O ile procent zmienia si cecha*/
-    static double wspolczynnikMutacji = 1.1;
+
 
     Model model;
 
@@ -43,7 +42,7 @@ class Osobnik implements Comparable<Osobnik>{
             this.ruchy.add(value);
         }
     }
-    //TODO
+    
     private void generujLosowo() {
         Random rand = new Random();
         for(int i = 0; i < liczbaGenow; i++)
@@ -87,16 +86,16 @@ class Osobnik implements Comparable<Osobnik>{
                 if(aktualnyGracz != wlasciciel)
                     plansza.zmianaWspolrzednych();
 
-/*                Statystyki statystyki = plansza.getStatystyki();
-                ocena += statystyki.ocenaRoznica(wlasciciel) * (liczbaGenow - tura);*/
+                Statystyki statystyki = plansza.getStatystyki();
+                ocena += statystyki.ocenaRoznica(wlasciciel) * (liczbaGenow - tura);
                 
                 aktualnyGracz = aktualnyGracz.przeciwnyGracz();
                 plansza.czyscListyRuchowBic();
                 tura++;
             }
             
-            Statystyki statystyki = plansza.getStatystyki();
-            ocena = statystyki.ocenaRoznica(wlasciciel);
+/*            Statystyki statystyki = plansza.getStatystyki();
+            ocena = statystyki.ocenaRoznica(wlasciciel);*/
         }
     }
 
