@@ -6,7 +6,7 @@ import java.util.Comparator;
 import model.Model;
 import model.Wlasciciel;
 
-/** ZOACZYC CZY SORTUJA SIE W DOBREJ KOLEJNOSCI*/
+
 
 public class Populacja {
     /** Liczba osobnikow w populacji */
